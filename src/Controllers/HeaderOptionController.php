@@ -63,7 +63,7 @@ class HeaderOptionController extends Controller
         // 获取数据
         $models = $this->findAll();
         // 设置页面标题
-        $this->setPageTitle("表头选项列表：{$this->category->name}({$this->category->key})");
+        $this->setPageTitle("表头选项列表({$this->category->key}:{$this->category->name})");
         // 渲染页面
         $this->layout = '/layouts/main';
         $this->render('index', [
@@ -102,22 +102,31 @@ class HeaderOptionController extends Controller
     {
         // 参数获取
         $fixer = $this->getActionParams();
-        $models = $this->findAll();
+        $res = $this->findAll();
+        $models = [];
+        foreach ($res as $re) {
+            array_push($models, $re);
+        }
         $current = $switch = null;
-        $passCurrent = false;
-        foreach ($models as $model) {
-            if ($passCurrent) {
-                $switch = $model;
+        while (true) {
+            $model = current($models);
+            if (!$model) {
                 break;
             }
             if ($model->id == $fixer['id']) {
                 $current = $model;
-                $passCurrent = true;
                 if ('up' === $fixer['sort_order']) {
-                    break;
+                    $switch = prev($models);
+                } else {
+                    $switch = next($models);
                 }
+                break;
             }
-            $switch = $model;
+            next($models);
+        }
+        reset($models);
+        if (!$switch) {
+            $this->failure('没有可以交换顺序的数据');
         }
 
         $current_sort_order = $current->sort_order;
