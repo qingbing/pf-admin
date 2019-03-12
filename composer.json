@@ -3,6 +3,12 @@
     "description": "公用的后台管理系统",
     "type": "library",
     "license": "MIT",
+    "repositories": {
+        "packagist": {
+            "type": "composer",
+            "url": "https://packagist.phpcomposer.com"
+        }
+    },
     "keywords": [
         "php",
         "php framework",

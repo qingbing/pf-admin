@@ -232,7 +232,7 @@ class MateController extends Controller
         // 数据获取
         $model = $this->getModel();
         if ($model->is_enable == 0) {
-            throw new HttpException('用户已经为禁用状态');
+            $this->throwHttpException(400, '用户已经为禁用状态');
         }
         // 表单提交处理
         if (isset($_POST['myPassword'])) {
@@ -268,7 +268,7 @@ class MateController extends Controller
         // 数据获取
         $model = $this->getModel();
         if ($model->is_enable == 1) {
-            throw new HttpException('用户已经为启用状态');
+            $this->throwHttpException(400, '用户已经为启用状态');
         }
         // 表单提交处理
         if (isset($_POST['myPassword'])) {
@@ -304,15 +304,15 @@ class MateController extends Controller
     public function actionAssignRole()
     {
         if (!\app\pub\Pub::keyValue('access-mod', 'admin')) {
-            throw new HttpException("权限控制没有开启", 404);
+            $this->throwHttpException(404, '权限控制没有开启');
         }
         // 数据获取
         $model = $this->getModel();
         if ($model->uid === \PF::app()->getUser()->getUid()) {
-            throw new HttpException("不能给自己分配角色", 403);
+            $this->throwHttpException(403, '不能给自己分配角色');
         }
         if ($model->is_super) {
-            throw new HttpException("超管无需分配角色", 404);
+            $this->throwHttpException(403, '超管无需分配角色');
         }
         $fixer = $this->getActionParams();
         $roles = AccessRole::getModRole('admin');
@@ -320,7 +320,7 @@ class MateController extends Controller
         // 表单提交处理
         if (isset($fixer['token'])) {
             if (!\PF::app()->getUser()->isToken($fixer['token'])) {
-                throw new HttpException("请求已过期", 403);
+                $this->throwHttpException(403, '请求已过期');
             }
             $this->logMessage = '管理员角色分配';
             $this->logKeyword = $model->username;
