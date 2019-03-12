@@ -27,16 +27,16 @@ $module = \Admin\Components\Pub::getModule();
         <!--            </dl>-->
         <!--        --><?php //} ?>
 
-        <!--        --><?php //if (!empty($siteSetting)) { ?>
-        <!--            <dl>-->
-        <!--                <dt>参数配置</dt>-->
-        <!--                --><?php //foreach ($siteSetting as $setting) { ?>
-        <!--                    <dd>-->
-        <!--                        <a href="--><?php //echo $module->createUrl('formSetting/index', ['ckey' => $setting['ckey']]); ?><!--">--><?php //echo $setting['name']; ?><!--</a>-->
-        <!--                    </dd>-->
-        <!--                --><?php //} ?>
-        <!--            </dl>-->
-        <!--        --><?php //} ?>
+        <?php if (!empty($siteSetting)) { ?>
+            <dl>
+                <dt>参数配置</dt>
+                <?php foreach ($siteSetting as $setting) { ?>
+                    <dd>
+                        <a href="<?php echo $module->createUrl('formSetting/index', ['key' => $setting['key']]); ?>"><?php echo $setting['name']; ?></a>
+                    </dd>
+                <?php } ?>
+            </dl>
+        <?php } ?>
 
         <!--        --><?php //if (!empty(!$replaceSetting)) { ?>
         <!--            <dl>-->
