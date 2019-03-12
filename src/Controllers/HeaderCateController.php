@@ -43,9 +43,9 @@ class HeaderCateController extends Controller
         // 获取数据
         $fixer = $this->getActionParams();
         $criteria = new Criteria();
+        $criteria->setOrder('`sort_order` ASC');
         $criteria->addWhere('`is_open`=:is_open')
-            ->addParam(':is_open', 1)
-            ->setOrder('`sort_order` ASC');
+            ->addParam(':is_open', 1);
         if (isset($fixer['keyword']) && '' !== $fixer['keyword']) {
             $criteria->addWhereLike('name', $fixer['keyword']);
         }

@@ -76,4 +76,19 @@ class FormSettingController extends Controller
             'model' => $model,
         ]);
     }
+
+    /**
+     * 重置表单配置，其实就是删除或清理 pub_form_setting 的内容
+     * @throws \Exception
+     */
+    public function actionReset()
+    {
+        $model = new FormSetting($this->category->key);
+
+        if ($model->reset()) {
+            $this->success($this->category->name . '重置成功', -1);
+        } else {
+            $this->failure($this->category->name . '重置失败', $model->getErrors());
+        }
+    }
 }

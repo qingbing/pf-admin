@@ -10,6 +10,7 @@ namespace Controllers;
 
 
 use Render\Abstracts\Controller;
+use Tools\FormSetting;
 
 class SiteController extends Controller
 {
@@ -29,5 +30,25 @@ class SiteController extends Controller
     public function actionError()
     {
         var_dump($this->app->getErrorHandler());
+    }
+
+    /**
+     * @throws \Helper\Exception
+     */
+    public function actionTest()
+    {
+        $model = FormSetting::cache('site_config');
+        $model = FormSetting::cache('mail_config');
+        var_dump($model->charset);
+//        var_dump($model->field_email);
+//        var_dump($model->field_date);
+//        var_dump($model->attributeNames());
+//        var_dump($model->attributeLabels());
+//        var_dump($model->attributes);
+
+        $this->layout = false;
+        $this->render('test', [
+            'model' => $model,
+        ]);
     }
 }

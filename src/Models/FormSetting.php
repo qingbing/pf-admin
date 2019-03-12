@@ -9,11 +9,10 @@
 namespace Admin\Models;
 
 
-use Admin\Components\Pub;
 use Helper\Coding;
 use Helper\Exception;
 
-class FormSetting extends \Abstracts\FormOption
+class FormSetting extends \Tools\FormSetting
 {
     /**
      * 析构函数后被调用
@@ -21,74 +20,10 @@ class FormSetting extends \Abstracts\FormOption
      */
     public function init()
     {
-        $category = $this->getCategory();
-        if (!$category) {
-            throw new Exception("不存在的配置分类");
-        }
-        if (!$category['is_setting']) {
+        parent::init();
+        if (!$this->category['is_setting']) {
             throw new Exception("表单不是配置分类");
         }
-        $setting = $this->getSetting();
-        if ($setting) {
-            $attributes = Coding::json_decode($setting['content']);
-            if (is_array($attributes)) {
-                $this->setAttributes($attributes);
-            }
-        }
-    }
-
-    /**
-     * 获取 component-db
-     * @return \Components\Db|null
-     * @throws \Helper\Exception
-     */
-    protected function db()
-    {
-        return Pub::getApp()->getDb();
-    }
-
-    /**
-     * 获取表单配置分类
-     * @return array
-     * @throws \Exception
-     */
-    protected function getCategory()
-    {
-        return $this->db()->getFindBuilder()
-            ->setTable('pub_form_category')
-            ->setWhere('`key`=:key')
-            ->addParam(':key', $this->getScenario())
-            ->queryRow();
-    }
-
-    /**
-     * 获取设置信息
-     * @return array
-     * @throws \Exception
-     */
-    protected function getSetting()
-    {
-        return $this->db()->getFindBuilder()
-            ->setTable('pub_form_setting')
-            ->setWhere('`key`=:key')
-            ->addParam(':key', $this->getScenario())
-            ->queryRow();
-    }
-
-    /**
-     * 定义的表单项目
-     * @return mixed
-     * @throws \Exception
-     */
-    public function getOptions()
-    {
-        return $this->db()->getFindBuilder()
-            ->setTable('pub_form_option')
-            ->setWhere('`key`=:key AND `is_enable`=:is_enable')
-            ->addParam(':key', $this->getScenario())
-            ->addParam(':is_enable', 1)
-            ->setOrder('`sort_order` ASC, `id` ASC')
-            ->queryAll();
     }
 
     /**
@@ -99,6 +34,7 @@ class FormSetting extends \Abstracts\FormOption
     public function save()
     {
         if ($this->validate()) {
+            \PF::app()->getCache()->delete(self::cacheKey($this->getScenario()));
             $setting = $this->getSetting();
             if ($setting) {
                 $this->db()->getUpdateBuilder()
@@ -117,5 +53,19 @@ class FormSetting extends \Abstracts\FormOption
             return true;
         }
         return false;
+    }
+
+    /**
+     * 返回删除结果
+     * @return int
+     * @throws Exception
+     */
+    public function reset()
+    {
+        return $this->db()->getDeleteBuilder()
+            ->setTable('pub_form_setting')
+            ->setWhere('`key`=:key')
+            ->addParam(':key', $this->getScenario())
+            ->execute();
     }
 }

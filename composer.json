@@ -3,12 +3,6 @@
     "description": "公用的后台管理系统",
     "type": "library",
     "license": "MIT",
-    "repositories": {
-        "packagist": {
-            "type": "composer",
-            "url": "https://packagist.phpcomposer.com"
-        }
-    },
     "keywords": [
         "php",
         "php framework",
@@ -45,7 +39,8 @@
         "qingbing/php-form-generator": ">=1.0, <2.0",
         "qingbing/php-upload": ">=1.0, <2.0",
         "qingbing/php-labels": ">=1.0, <2.0",
-        "qingbing/pf-tools-table-header": ">=1.0, <2.0"
+        "qingbing/pf-tools-table-header": ">=1.0, <2.0",
+        "qingbing/pf-tools-form-setting": ">=1.0, <2.0"
     },
     "require-dev": {
         "qingbing/pf-database-dict": ">=1.0, <2.0",
