@@ -13,3 +13,5 @@ composer.lock
 /public/assets/vendor/*
 
 /test/assets/vendor/*
+/test/upload/*
+/test/kindeditor/*

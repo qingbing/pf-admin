@@ -8,6 +8,7 @@
 return [
     'params' => [
         'uploadFolder' => 'upload',
+        'kdUploadFolder' => 'upload', // 默认为"kindeditor"
     ],// 用户自定义配置
     'preLoad' => [],
     'layout' => '//layouts/html',

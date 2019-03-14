@@ -54,10 +54,27 @@ class LeftMenu extends OutputCache
             ->queryAll();
     }
 
+    /**
+     * 获取模板配置菜单
+     * @return array
+     * @throws \Exception
+     */
+    public function getReplaceSetting()
+    {
+        return Pub::getApp()->getDb()->getFindBuilder()
+            ->setTable('pub_replace_setting')
+            ->setSelect('`key`,`name`')
+            ->addWhere('`is_enable`=:is_enable')
+            ->addParam(':is_enable', 1)
+            ->setOrder('`sort_order` ASC')
+            ->queryAll();
+    }
+
 
     /**
      * 构建 cache-content ： 在 @link init() 之后运行
      * @return mixed
+     * @throws \Exception
      */
     protected function generateContent()
     {
@@ -66,6 +83,7 @@ class LeftMenu extends OutputCache
         $this->render('left-menu', [
             'isSuper' => $this->_isSuper,
             'siteSetting' => $this->getSiteSetting(),
+            'replaceSetting' => $this->getReplaceSetting(),
 //            'accessMods' => $accessMods,
 //            'navMods' => $navMods,
         ]);

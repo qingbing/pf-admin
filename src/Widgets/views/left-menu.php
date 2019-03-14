@@ -38,16 +38,16 @@ $module = \Admin\Components\Pub::getModule();
             </dl>
         <?php } ?>
 
-        <!--        --><?php //if (!empty(!$replaceSetting)) { ?>
-        <!--            <dl>-->
-        <!--                <dt>模板管理</dt>-->
-        <!--                --><?php //foreach ($replaceSetting as $setting) { ?>
-        <!--                    <dd>-->
-        <!--                        <a href="--><?php //echo $module->createUrl('replace/index', ['key' => $setting['key']]); ?><!--">--><?php //echo $setting['name']; ?><!--</a>-->
-        <!--                    </dd>-->
-        <!--                --><?php //} ?>
-        <!--            </dl>-->
-        <!--        --><?php //} ?>
+        <?php if (!empty($replaceSetting)) { ?>
+            <dl>
+                <dt>模板管理</dt>
+                <?php foreach ($replaceSetting as $setting) { ?>
+                    <dd>
+                        <a href="<?php echo $module->createUrl('replace/index', ['key' => $setting['key']]); ?>"><?php echo $setting['name']; ?></a>
+                    </dd>
+                <?php } ?>
+            </dl>
+        <?php } ?>
 
         <!--        --><?php //if (!empty($navMods)) { ?>
         <!--            <dl>-->
