@@ -64,8 +64,8 @@ class LeftMenu extends OutputCache
         return Pub::getApp()->getDb()->getFindBuilder()
             ->setTable('pub_replace_setting')
             ->setSelect('`key`,`name`')
-            ->addWhere('`is_enable`=:is_enable')
-            ->addParam(':is_enable', 1)
+            ->addWhere('`is_open`=:is_open')
+            ->addParam(':is_open', 1)
             ->setOrder('`sort_order` ASC')
             ->queryAll();
     }

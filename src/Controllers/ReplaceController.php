@@ -43,6 +43,9 @@ class ReplaceController extends Controller
         if (null === $setting) {
             $this->throwHttpException(404, '配置不存在');
         }
+        if (!$setting->is_open) {
+            $this->throwHttpException(403, '对不起，您无权操作该内容');
+        }
         $this->setting = $setting;
         return true;
     }

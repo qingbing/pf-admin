@@ -22,7 +22,7 @@ use Helper\Coding;
  * @property string template
  * @property string content
  * @property integer sort_order
- * @property integer is_enable
+ * @property integer is_open
  * @property string replace_type
  * @property string replace_fields
  */
@@ -54,8 +54,8 @@ class ReplaceSetting extends DbModel
     public function rules()
     {
         return [
-            ['sort_order, is_enable', 'required'],
-            ['sort_order, is_enable', 'numerical', 'integerOnly' => true],
+            ['sort_order, is_open', 'required'],
+            ['sort_order, is_open', 'numerical', 'integerOnly' => true],
             ['key, name, description', 'string', 'maxLength' => 255],
             ['x_flag', 'string', 'maxLength' => 50],
             ['replace_type', 'multiIn', 'range' => ['system', 'login', 'client']],
@@ -86,7 +86,7 @@ class ReplaceSetting extends DbModel
             'template' => '默认模板',
             'content' => '模板',
             'sort_order' => '排序',
-            'is_enable' => '启用状态',
+            'is_open' => '是否启用',
             'replace_type' => '替换类型',
             'replace_fields' => '自定义字段集',
         ];

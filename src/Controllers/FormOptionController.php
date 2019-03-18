@@ -60,7 +60,7 @@ class FormOptionController extends Controller
         // 获取数据
         $models = $this->findAll();
         // 设置页面标题
-        $this->setPageTitle("表单选项列表——{$this->category->name}({$this->category->key})");
+        $this->setPageTitle("表单选项列表({$this->category->key}:{$this->category->name})");
         // 渲染页面
         $this->layout = '/layouts/main';
         $this->render('index', [
