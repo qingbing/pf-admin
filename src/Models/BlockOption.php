@@ -5,8 +5,8 @@ namespace Admin\Models;
 use Abstracts\DbModel;
 use Helper\Exception;
 use Helper\Format;
-use UploadFile;
-use UploadManager;
+use Tools\UploadFile;
+use Tools\UploadManager;
 
 /**
  * Created by generate tool of phpcorner.

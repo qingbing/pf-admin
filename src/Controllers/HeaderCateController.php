@@ -6,7 +6,6 @@ use Admin\Components\Controller;
 use Admin\Components\Pub;
 use Admin\Models\HeaderCategory;
 use DbSupports\Builder\Criteria;
-use Helper\HttpException;
 
 /**
  * Created by generate tool of phpcorner.

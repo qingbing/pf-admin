@@ -3,7 +3,6 @@
 namespace Admin\Controllers;
 
 // 引用类
-use FormGenerator;
 use Html;
 
 /**

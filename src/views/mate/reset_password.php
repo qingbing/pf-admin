@@ -5,7 +5,6 @@ namespace Admin\Controllers;
 // 引用类
 use FormGenerator;
 use Html;
-use Tools\Labels;
 
 /**
  * Created by generate tool of phpcorner.
