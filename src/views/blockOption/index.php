@@ -3,6 +3,7 @@
 namespace Admin\Controllers;
 
 // 引用类
+use Admin\Models\BlockCategory;
 use Helper\Coding;
 use Html;
 
@@ -35,6 +36,13 @@ use Html;
         <th class="text-center" width="80px">链接地址</th>
         <th class="text-center" width="80px">图片</th>
         <th class="text-center" width="80px">显示排序</th>
+        <?php
+        if (in_array($category->type, [BlockCategory::TYPE_CLOUD_WORDS_LINKS, BlockCategory::TYPE_LIST_LINKS, BlockCategory::TYPE_IMAGES_LINKS,])) {
+            ?>
+            <th class="text-center" width="50px">新开窗口</th>
+            <?php
+        }
+        ?>
         <th class="text-center" width="50px">启用状态</th>
         <th class="text-center" width="240px">操作</th>
         <th class="text-center">操作显示</th>
@@ -46,13 +54,37 @@ use Html;
         ?>
         <tr data-post-data='<?php echo Coding::json_encode(['id' => $model->id], true); ?>'
             data-tip=".w_display_status">
-            <td class="text-left"<?php if ($model->is_open) { echo ' data-name="label"'; } ?>><?php echo $model->label; ?></td>
+            <td class="text-left"<?php if ($model->is_open) {
+                echo ' data-name="label"';
+            } ?>><?php echo $model->label; ?></td>
             <td class="text-left"><?php echo $model->link; ?></td>
             <td class="text-center"><?php if ('' != $model->src) {
                     echo '<img src="' . $model->getImageSrc() . '" width="180px" />';
                 } ?></td>
-            <td class="text-center"<?php if ($model->is_open) { echo ' data-name="sort_order"'; } ?>><?php echo $model->sort_order; ?></td>
-            <td class="text-center"<?php if ($model->is_open) { echo ' data-name="is_enable"'; } ?>>
+            <td class="text-center"<?php if ($model->is_open) {
+                echo ' data-name="sort_order"';
+            } ?>><?php echo $model->sort_order; ?></td>
+
+            <?php
+            if (in_array($category->type, [BlockCategory::TYPE_CLOUD_WORDS_LINKS, BlockCategory::TYPE_LIST_LINKS, BlockCategory::TYPE_IMAGES_LINKS,])) {
+                ?>
+                <td class="text-center"<?php if ($model->is_open) {
+                    echo ' data-name="is_blank"';
+                } ?>>
+                    <?php
+                    $subOptions = [];
+                    if (!$model->is_open) {
+                        $subOptions['disabled'] = 1;
+                    }
+                    echo Html::checkBox('is_blank', !!$model->is_blank, $subOptions); ?>
+                </td>
+                <?php
+            }
+            ?>
+
+            <td class="text-center"<?php if ($model->is_open) {
+                echo ' data-name="is_enable"';
+            } ?>>
                 <?php
                 $subOptions = [];
                 if (!$model->is_open) {
