@@ -46,8 +46,8 @@ use Html;
         ?>
         <tr data-post-data='<?php echo Coding::json_encode(['id' => $model->id], true); ?>'
             data-tip=".w_display_status">
-            <td class="text-center"<?php if ($model->is_open) { echo ' data-name="label"'; } ?>><?php echo $model->label; ?></td>
-            <td class="text-center"<?php if ($model->is_open) { echo ' data-name="link"'; } ?>><?php echo $model->link; ?></td>
+            <td class="text-left"<?php if ($model->is_open) { echo ' data-name="label"'; } ?>><?php echo $model->label; ?></td>
+            <td class="text-left"><?php echo $model->link; ?></td>
             <td class="text-center"><?php if ('' != $model->src) {
                     echo '<img src="' . $model->getImageSrc() . '" width="180px" />';
                 } ?></td>

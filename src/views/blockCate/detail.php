@@ -38,6 +38,23 @@ if (BlockCategory::TYPE_CONTENT == $model->type) {
             return $model->content;
         },
     ];
+} else if (BlockCategory::TYPE_IMAGE_LINK == $model->type) {
+    $options['content'] = [
+        'type' => 'view',
+        'callable' => function () use ($model) {
+            return $model->content;
+        },
+    ];
+    $options['src'] = [
+        'code' => 'src',
+        'type' => 'view',
+        'callable' => function () use ($model) {
+            if ('' != $model->src) {
+                return '<img src="' . $model->getImageSrc() . '" width="180px" />';
+            }
+            return null;
+        }
+    ];
 }
 
 // 填写表单

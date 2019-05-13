@@ -1,8 +1,13 @@
 <?php
 // 申明命名空间
 namespace Admin\Models;
+
 // 引用类
 use Abstracts\DbModel;
+use Helper\Exception;
+use Helper\Format;
+use Tools\UploadFile;
+use Tools\UploadManager;
 
 /**
  * Created by generate tool of phpcorner.
@@ -21,6 +26,7 @@ use Abstracts\DbModel;
  * @property integer sort_order
  * @property integer is_open
  * @property integer is_enable
+ * @property string src
  * @property string x_flag
  * @property string content
  * @property string create_time
@@ -59,7 +65,7 @@ class BlockCategory extends DbModel
             ['key, name, description', 'string', 'maxLength' => 255],
             ['type', 'string', 'maxLength' => 20],
             ['x_flag', 'string', 'maxLength' => 50],
-            ['content', 'string'],
+            ['src, content', 'string'],
             ['create_time, update_time', 'safe'],
         ];
     }
@@ -89,6 +95,7 @@ class BlockCategory extends DbModel
             'sort_order' => '排序',
             'is_open' => '是否开放',
             'is_enable' => '启用状态',
+            'src' => '图片地址',
             'x_flag' => 'type为content的在线编辑器标识符',
             'content' => '内容',
             'create_time' => '创建时间',
@@ -97,11 +104,13 @@ class BlockCategory extends DbModel
     }
 
     const TYPE_CONTENT = 'content';
+    const TYPE_IMAGE_LINK = 'image-link';
     const TYPE_CLOUD_WORDS = 'cloud-words';
-    const TYPE_LINK_CLOUD_WORDS = 'link-cloud-words';
+    const TYPE_CLOUD_WORDS_LINKS = 'cloud-words-links';
+    const TYPE_LIST = 'list';
+    const TYPE_LIST_LINKS = 'list-links';
     const TYPE_IMAGES = 'images';
-    const TYPE_LINKS = 'links';
-    const TYPE_IMAGE_LINKS = 'image-links';
+    const TYPE_IMAGES_LINKS = 'images-links';
 
     /**
      * 区块类型
@@ -114,11 +123,13 @@ class BlockCategory extends DbModel
         $data = [
             '' => '全部',
             self::TYPE_CONTENT => '内容',
+            self::TYPE_IMAGE_LINK => '图片',
             self::TYPE_CLOUD_WORDS => '云词',
-            self::TYPE_LINK_CLOUD_WORDS => '链接云词',
-            self::TYPE_IMAGES => '图片',
-            self::TYPE_LINKS => '链接',
-            self::TYPE_IMAGE_LINKS => '图片链接',
+            self::TYPE_CLOUD_WORDS_LINKS => '链接云词',
+            self::TYPE_LIST => '列表',
+            self::TYPE_LIST_LINKS => '链接列表',
+            self::TYPE_IMAGES => '图片集',
+            self::TYPE_IMAGES_LINKS => '链接图片集',
         ];
         if (null === $type) {
             if (!$withAll) {
@@ -129,5 +140,54 @@ class BlockCategory extends DbModel
             unset($data['']);
             return isset($data[$type]) ? $data[$type] : null;
         }
+    }
+
+    /**
+     * 在数据保存之前执行
+     * @return bool
+     * @throws \Exception
+     */
+    protected function beforeSave()
+    {
+        if (self::TYPE_IMAGE_LINK == $this->type) {
+            $upload = UploadFile::getInstance($this, 'src');
+            if ($upload) {
+                // 保存老信息
+                $blockPath = UploadManager::getPath('block');
+                if (!is_dir($blockPath)) {
+                    @mkdir($blockPath, 0777);
+                }
+                $old_file = $blockPath . DS . $this->src;
+                $filename = $this->key . '_' . time() . '.' . $upload->getExtensionName();
+                // 上传文件
+                if (!$upload->saveAs($blockPath . DS . $filename)) {
+                    throw new Exception('上传图像错误，请联系管理员');
+                }
+                // 保存信息
+                $this->src = $filename;
+                // 删除旧图片
+                if (is_file($old_file)) {
+                    @unlink($old_file);
+                }
+            }
+        }
+        $datetime = Format::datetime();
+        $this->setAttribute('update_time', $datetime);
+        if ($this->getIsNewRecord()) {
+            $this->setAttribute('create_time', $datetime);
+        }
+        return true;
+    }
+
+    /**
+     * 获取最终显示的图片链接
+     * @return string|null
+     */
+    public function getImageSrc()
+    {
+        if ('' == $this->src) {
+            return null;
+        }
+        return UploadManager::getUrl('block') . $this->src;
     }
 }

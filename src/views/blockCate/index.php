@@ -46,11 +46,15 @@ $this->widget('\Widgets\TableView', [
     'header' => TableHeader::getHeader('admin-block_category-list'),
     'dataProcessing' => function ($data) {
         $operate = ' <a href="' . $this->createUrl('detail', ['key' => $data->key]) . '" class="text-info w-modal" data-mode="custom"><i class="fa fa-list-alt">详情</i></a>';
-        if (!in_array($data->type, [BlockCategory::TYPE_CONTENT])) {
-            $operate .= ' <a href="' . $this->createUrl('/blockOption/index', ['key' => $data->key]) . '" class="text-info" target="_blank"><i class="fa fa-list">查看子项</i></a>';
-        } else if ($data->type == BlockCategory::TYPE_CONTENT) {
-            $operate .= ' <a href="' . $this->createUrl('content', ['key' => $data->key]) . '" class="text-info w-modal" data-mode="custom"><i class="fa fa-edit">编辑内容</i></a>';
+
+        if (BlockCategory::TYPE_CONTENT == $data->type) {
+            $operate .= ' <a href="' . $this->createUrl('content', ['key' => $data->key]) . '" class="text-warning w-modal" target="_blank"><i class="fa fa-edit">设置内容</i></a>';
+        } else if (BlockCategory::TYPE_IMAGE_LINK == $data->type) {
+            $operate .= ' <a href="' . $this->createUrl('image', ['key' => $data->key]) . '" class="text-warning w-modal" target="_blank"><i class="fa fa-edit">设置图片</i></a>';
+        } else {
+            $operate .= ' <a href="' . $this->createUrl('/blockOption/index', ['key' => $data->key]) . '" class="text-info" target="_blank"><i class="fa fa-list-alt">查看选项</i></a>';
         }
+
         $process = [
             'is_enable' => Labels::enable($data->is_enable),
             'type' => BlockCategory::types($data->type),

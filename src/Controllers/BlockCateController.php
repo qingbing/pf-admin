@@ -48,6 +48,7 @@ class BlockCateController extends Controller
         // 获取数据
         $fixer = $this->getActionParams();
         $criteria = new Criteria();
+        $criteria->setOrder('`sort_order` ASC');
         // 只显示开放的类型
         $criteria->addWhere('`is_open`=:is_open')
             ->addParam(':is_open', 1);
@@ -96,6 +97,9 @@ class BlockCateController extends Controller
     {
         // 数据获取
         $model = $this->getModel();
+        if (BlockCategory::TYPE_CONTENT !== $model->type) {
+            $this->throwHttpException(404, '错误的区块操作');
+        }
         // 表单提交处理
         if (isset($_POST['BlockCategory'])) {
             $this->logMessage = '编辑区块内容';
@@ -112,6 +116,41 @@ class BlockCateController extends Controller
         $this->setPageTitle('编辑区块内容');
         // 渲染页面
         $this->render('content', [
+            'model' => $model,
+        ]);
+    }
+
+    /**
+     * 修改图片区块的图片信息
+     * @throws \Exception
+     */
+    public function actionImage()
+    {
+        // 数据获取
+        $model = $this->getModel();
+        if (BlockCategory::TYPE_IMAGE_LINK !== $model->type) {
+            $this->throwHttpException(404, '错误的区块操作');
+        }
+        // 表单提交处理
+        if (isset($_POST['BlockCategory'])) {
+            $this->logMessage = '修改区块图片信息';
+            if (isset($_POST['BlockCategory']['src'])) {
+                // 图片上传会使用 $_FILES
+                unset($_POST['BlockCategory']['src']);
+            }
+            $model->setAttributes($_POST['BlockCategory']);
+            $this->logKeyword = $model->key;
+            if ($model->save()) {
+                $this->logData = $model->getAttributes();
+                $this->success('修改区块图片信息成功');
+            } else {
+                $this->failure('', $model->getErrors());
+            }
+        }
+        // 设置页面标题
+        $this->setPageTitle('上传图片信息');
+        // 渲染页面
+        $this->render('image', [
             'model' => $model,
         ]);
     }

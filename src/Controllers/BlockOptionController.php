@@ -47,6 +47,10 @@ class BlockOptionController extends Controller
         if (!$category->is_open) {
             $this->throwHttpException(403, '对不起，您无权操作该内容');
         }
+        // 确保需要子项的区块才能进入列表等操作
+        if (in_array($category->type, [BlockCategory::TYPE_CONTENT, BlockCategory::TYPE_IMAGE_LINK])) {
+            $this->throwHttpException(403, '对不起，该区块没有子项操作');
+        }
         $this->category = $category;
         return true;
     }

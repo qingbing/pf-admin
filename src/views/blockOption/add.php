@@ -46,6 +46,11 @@ $link = [
     'tip_msg' => '请输入链接地址',
     'is_required' => true,
 ];
+$is_blank = [
+    'code' => 'is_blank',
+    'input_type' => FormGenerator::INPUT_TYPE_SELECT,
+    'input_data' => Labels::YesNo(),
+];
 $src = [
     'code' => 'src',
     'input_type' => FormGenerator::INPUT_TYPE_FILE,
@@ -55,21 +60,26 @@ $src = [
 ];
 switch ($category->type) {
     case BlockCategory::TYPE_CONTENT:
+    case BlockCategory::TYPE_IMAGE_LINK:
         break;
     case BlockCategory::TYPE_CLOUD_WORDS:
-        $options['link'] = $link;
         break;
-    case BlockCategory::TYPE_LINK_CLOUD_WORDS:
+    case BlockCategory::TYPE_CLOUD_WORDS_LINKS:
         $options['link'] = $link;
+        $options['is_blank'] = $is_blank;
+        break;
+    case BlockCategory::TYPE_LIST:
+        break;
+    case BlockCategory::TYPE_LIST_LINKS:
+        $options['link'] = $link;
+        $options['is_blank'] = $is_blank;
         break;
     case BlockCategory::TYPE_IMAGES:
         $options['src'] = $src;
         break;
-    case BlockCategory::TYPE_LINKS:
+    case BlockCategory::TYPE_IMAGES_LINKS:
         $options['link'] = $link;
-        break;
-    case BlockCategory::TYPE_IMAGE_LINKS:
-        $options['link'] = $link;
+        $options['is_blank'] = $is_blank;
         $options['src'] = $src;
         break;
     default :

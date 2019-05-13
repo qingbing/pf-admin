@@ -26,6 +26,7 @@ use Tools\UploadManager;
  * @property integer sort_order
  * @property integer is_open
  * @property integer is_enable
+ * @property integer is_blank
  * @property string description
  * @property string create_time
  * @property string update_time
@@ -58,8 +59,8 @@ class BlockOption extends DbModel
     public function rules()
     {
         return [
-            ['sort_order, is_open, is_enable', 'required'],
-            ['sort_order, is_open, is_enable', 'numerical', 'integerOnly' => true],
+            ['sort_order, is_open, is_enable, is_blank', 'required'],
+            ['sort_order, is_open, is_enable, is_blank', 'numerical', 'integerOnly' => true],
             ['key, label, link, src, description', 'string', 'maxLength' => 255],
             ['create_time, update_time', 'safe'],
         ];
@@ -89,6 +90,7 @@ class BlockOption extends DbModel
             'sort_order' => '排序',
             'is_open' => '是否对管理开放',
             'is_enable' => '是否启用发布显示',
+            'is_blank' => '是否新开窗口',
             'description' => '描述',
             'create_time' => '创建时间',
             'update_time' => '更新时间',
