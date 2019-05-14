@@ -55,7 +55,7 @@ $module = \Admin\Components\Pub::getModule();
             <dd><a href="<?php echo $module->createUrl('headerCate/index'); ?>">表头设置</a></dd>
             <dd><a href="<?php echo $module->createUrl('formCate/index'); ?>">表单配置</a></dd>
             <dd><a href="<?php echo $module->createUrl('blockCate/index'); ?>">区块配置</a></dd>
-            <dd><a href="<?php echo $module->createUrl('static/index'); ?>">静态内容</a></dd>
+            <dd><a href="<?php echo $module->createUrl('staticPage/index'); ?>">静态内容</a></dd>
             <dd><a href="<?php echo $module->createUrl('helper/index'); ?>">帮助中心</a></dd>
         </dl>
     <?php } ?>
