@@ -49,19 +49,9 @@ $module = \Admin\Components\Pub::getModule();
             </dl>
         <?php } ?>
 
-        <!--        --><?php //if (!empty($navMods)) { ?>
-        <!--            <dl>-->
-        <!--                <dt>导航管理</dt>-->
-        <!--                --><?php //foreach ($navMods as $key => $name) { ?>
-        <!--                    <dd>-->
-        <!--                        <a href="--><?php //echo $module->createUrl('nav/index', ['key' => $key]); ?><!--">--><?php //echo $name; ?><!--</a>-->
-        <!--                    </dd>-->
-        <!--                --><?php //} ?>
-        <!--            </dl>-->
-        <!--        --><?php //} ?>
-
         <dl>
             <dt>网站配置</dt>
+            <dd><a href="<?php echo $module->createUrl('nav/index'); ?>">前台导航</a></dd>
             <dd><a href="<?php echo $module->createUrl('headerCate/index'); ?>">表头设置</a></dd>
             <dd><a href="<?php echo $module->createUrl('formCate/index'); ?>">表单配置</a></dd>
             <dd><a href="<?php echo $module->createUrl('blockCate/index'); ?>">区块配置</a></dd>
