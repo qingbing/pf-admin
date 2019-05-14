@@ -38,14 +38,14 @@ $options = [
         'input_type' => FormGenerator::INPUT_TYPE_TEXT,
         'data_type' => FormGenerator::DATA_TYPE_STRING,
         'tip_msg' => '请输入链接地址',
-        'is_required' => true,
+        'allow_empty' => false,
     ],
     'src' => [
         'code' => 'src',
         'input_type' => FormGenerator::INPUT_TYPE_FILE,
         'file_extensions' => ['jpg', 'jpeg', 'png', 'gif'],
         'tip_msg' => '请上传图片',
-        'is_required' => true,
+        'allow_empty' => false,
     ],
 ];
 $this->widget('\Widgets\FormGenerator', [

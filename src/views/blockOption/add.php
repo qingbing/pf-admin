@@ -36,7 +36,7 @@ $options = [
         'data_type' => FormGenerator::DATA_TYPE_STRING,
         'tip_msg' => '请输入子项名称',
         'ajax_url' => $this->createUrl('uniqueLabel', ['key' => $category->key]),
-        'is_required' => true,
+        'allow_empty' => false,
     ],
 ];
 $link = [
@@ -44,7 +44,7 @@ $link = [
     'input_type' => FormGenerator::INPUT_TYPE_TEXT,
     'data_type' => FormGenerator::DATA_TYPE_STRING,
     'tip_msg' => '请输入链接地址',
-    'is_required' => true,
+    'allow_empty' => false,
 ];
 $is_blank = [
     'code' => 'is_blank',
@@ -56,7 +56,7 @@ $src = [
     'input_type' => FormGenerator::INPUT_TYPE_FILE,
     'file_extensions' => ['jpg', 'jpeg', 'png', 'gif'],
     'tip_msg' => '请上传图片',
-    'is_required' => true,
+    'allow_empty' => false,
 ];
 switch ($category->type) {
     case BlockCategory::TYPE_CONTENT:
@@ -96,14 +96,14 @@ $options['sort_order'] = [
     'data_type' => FormGenerator::DATA_TYPE_INTEGER,
     'tip_msg' => '请输入排序',
     'min' => '0',
-    'is_required' => true,
+    'allow_empty' => false,
 ];
 $options['description'] = [
     'code' => 'description',
     'input_type' => FormGenerator::INPUT_TYPE_TEXTAREA,
     'data_type' => FormGenerator::DATA_TYPE_STRING,
     'tip_msg' => '请输入子项含义',
-    'is_required' => false,
+    'allow_empty' => true,
 ];
 $this->widget('\Widgets\FormGenerator', [
     'model' => $model,
