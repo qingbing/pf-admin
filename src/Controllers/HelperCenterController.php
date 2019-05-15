@@ -196,6 +196,82 @@ class HelperCenterController extends Controller
     }
 
     /**
+     * 帮助中心顺序调整
+     * @throws \Exception
+     */
+    public function actionUpDown()
+    {
+        // 参数获取
+        $fixer = $this->getActionParams();
+        $res = $this->findAll();
+        $models = [];
+        foreach ($res as $re) {
+            array_push($models, $re);
+        }
+        $current = $switch = null;
+        while (true) {
+            $model = current($models);
+            if (!$model) {
+                break;
+            }
+            if ($model->id == $fixer['id']) {
+                $current = $model;
+                if ('up' === $fixer['sort_order']) {
+                    $switch = prev($models);
+                } else {
+                    $switch = next($models);
+                }
+                break;
+            }
+            next($models);
+        }
+        reset($models);
+        if (!$switch) {
+            $this->failure('没有可以交换顺序的数据');
+        }
+
+        $current_sort_order = $current->sort_order;
+        $current->sort_order = $switch->sort_order;
+        $switch->sort_order = $current_sort_order;
+
+        // 日志记录
+        $this->logMessage = '帮助中心顺序调整';
+        $this->logKeyword = "{$current->id} - {$switch->id}";
+        $this->logData = [
+            'current' => $current->getAttributes(),
+            'switch' => $switch->getAttributes(),
+        ];
+        if ($current->save() && $switch->save()) {
+            $this->success('帮助中心顺序调整成功');
+        } else {
+            $this->failure('帮助中心顺序调整失败');
+        }
+    }
+
+    /**
+     * 刷新排序
+     * @throws \Exception
+     */
+    public function actionRefreshSortOrder()
+    {
+        // 获取数据
+        $models = $this->findAll();
+        $i = 0;
+        $this->logMessage = '帮助中心顺序刷新';
+        $this->logKeyword = "{$this->parent->id}";
+        $transaction = \PF::app()->getDb()->beginTransaction();
+        foreach ($models as $model) {
+            $model->sort_order = ++$i;
+            if (!$model->save()) {
+                $transaction->rollback();
+                $this->failure('', $model->getErrors());
+            }
+        }
+        $transaction->commit();
+        $this->success('帮助中心顺序刷新成功');
+    }
+
+    /**
      * 获取操作模型
      * @return \Abstracts\DbModel|HelperCenter|null
      * @throws \Exception
