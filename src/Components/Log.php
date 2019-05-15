@@ -32,14 +32,15 @@ class Log extends OperateLog
     const OPERATE_TYPE_TABLE_HEADER = 'table-header';
     const OPERATE_TYPE_FORM_SETTING = 'form-setting';
     const OPERATE_TYPE_REPLACE_SETTING = 'replace-setting';
+    const OPERATE_TYPE_NAV = 'nav';
     const OPERATE_TYPE_BLOCK = 'block';
+    const OPERATE_TYPE_STATIC_CONTENT = 'static-content';
+    const OPERATE_TYPE_NOTICE = 'notice';
+    const OPERATE_TYPE_HELPER_CENTER = 'helper-center';
 
     // todo doing
-    const OPERATE_TYPE_NOTICE = 'notice';
     // todo
-    const OPERATE_TYPE_NAV = 'nav';
     const OPERATE_TYPE_ACCESS = 'access';
-    const OPERATE_TYPE_STATIC_CONTENT = 'static-content';
 
     /**
      * 是或否
@@ -57,10 +58,13 @@ class Log extends OperateLog
             self::OPERATE_TYPE_FORM_SETTING => '表单配置',
             self::OPERATE_TYPE_REPLACE_SETTING => '替换模板',
             self::OPERATE_TYPE_NAV => '导航管理',
-            self::OPERATE_TYPE_ACCESS => '权限控制',
             self::OPERATE_TYPE_BLOCK => '区块管理',
-            self::OPERATE_TYPE_NOTICE => '公告管理',
             self::OPERATE_TYPE_STATIC_CONTENT => '静态内容',
+            self::OPERATE_TYPE_NOTICE => '公告管理',
+
+            self::OPERATE_TYPE_HELPER_CENTER => '帮助中心',
+
+            self::OPERATE_TYPE_ACCESS => '权限控制',
         ];
         if (!$withAll) {
             array_shift($data);

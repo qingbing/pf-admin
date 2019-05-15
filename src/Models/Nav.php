@@ -1,6 +1,7 @@
 <?php
 // 申明命名空间
 namespace Admin\Models;
+
 // 引用类
 use Abstracts\DbModel;
 
@@ -13,7 +14,7 @@ use Abstracts\DbModel;
  *
  * This is the model class for table "pub_nav".
  * The followings are the available columns in table 'pub_nav':
- * 
+ *
  * @property integer id
  * @property integer parent_id
  * @property integer is_category
@@ -89,5 +90,19 @@ class Nav extends DbModel
             'is_blank' => '是否新开窗口',
             'description' => '描述',
         ];
+    }
+
+    /**
+     * 在数据删除之前执行
+     * @return bool
+     * @throws \Exception
+     */
+    protected function beforeDelete()
+    {
+        if ($this->getRelated('subOptionCount') > 0) {
+            $this->addError('parent_id', '还有子项目，不能删除');
+            return false;
+        }
+        return true;
     }
 }

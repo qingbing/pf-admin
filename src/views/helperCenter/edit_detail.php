@@ -11,11 +11,12 @@ use Tools\Labels;
  * Created by generate tool of phpcorner.
  * Link         :   http://www.phpcorner.net/
  * User         :   qingbing
- * Date         :   2019-05-14
+ * Date         :   2019-05-15
  * Version      :   1.0
  *
  * @var \Admin\Components\Controller $this
- * @var \Admin\Models\Notice $model
+ * @var \Admin\Models\HelperCenter $model
+ * @var int $parentId
  */
 echo Html::beginForm('', 'post', [
     'id' => 'ajaxForm',
@@ -24,12 +25,24 @@ echo Html::beginForm('', 'post', [
     'class' => 'w-validate',
     'enctype' => 'multipart/form-data',
 ]);
+
 $options = [
+    'is_category' => [
+        'callable' => ['\Tools\Labels', 'YesNo'],
+        'type' => 'view',
+    ],
+    'label' => array(
+        'code' => 'label',
+        'input_type' => FormGenerator::INPUT_TYPE_TEXT,
+        'data_type' => FormGenerator::DATA_TYPE_STRING,
+        'tip_msg' => '请输入显示标签',
+        'allow_empty' => false,
+    ),
     'subject' => array(
         'code' => 'subject',
         'input_type' => FormGenerator::INPUT_TYPE_TEXTAREA,
         'data_type' => FormGenerator::DATA_TYPE_STRING,
-        'tip_msg' => '请输入主题',
+        'tip_msg' => '请输入帮助主题',
         'allow_empty' => false,
     ),
     'keywords' => [
@@ -54,22 +67,10 @@ $options = [
         'min' => '0',
         'allow_empty' => true,
     ],
-    'is_publish' => [
-        'code' => 'is_publish',
+    'is_enable' => [
+        'code' => 'is_enable',
         'input_type' => FormGenerator::INPUT_TYPE_SELECT,
-        'input_data' => Labels::YesNo(),
-    ],
-    'publish_time' => [
-        'code' => 'publish_time',
-        'input_type' => FormGenerator::INPUT_TYPE_TEXT,
-        'data_type' => FormGenerator::DATA_TYPE_TIME,
-        'allow_empty' => false,
-    ],
-    'expire_time' => [
-        'code' => 'expire_time',
-        'input_type' => FormGenerator::INPUT_TYPE_TEXT,
-        'data_type' => FormGenerator::DATA_TYPE_TIME,
-        'allow_empty' => false,
+        'input_data' => Labels::enable(),
     ],
     'content' => [
         'code' => 'content',
@@ -83,18 +84,19 @@ $options = [
         ],
     ],
 ];
+
 // 填写表单
 $this->widget('\Widgets\FormGenerator', [
     'model' => $model,
     'options' => $options,
 ]);
 ?>
-<dl class="form-group row">
-    <dd class="col-sm-3 col-md-3 col-lg-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
-        <button type="submit" class="btn btn-primary btn-block" id="submitBtn"><i class="fa fa-save">保存</i></button>
-    </dd>
-    <dd class="col-sm-3 col-md-3 col-lg-3">
-        <button type="button" class="btn btn-primary btn-block MODAL-CLOSE"><i class="fa fa-close">关闭</i></button>
-    </dd>
-</dl>
-<?php echo Html::endForm(); ?>
+    <dl class="form-group row">
+        <dd class="col-sm-3 col-md-3 col-lg-3 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
+            <button type="submit" class="btn btn-primary btn-block" id="submitBtn"><i class="fa fa-save">保存</i></button>
+        </dd>
+        <dd class="col-sm-3 col-md-3 col-lg-3">
+            <button type="button" class="btn btn-primary btn-block MODAL-CLOSE"><i class="fa fa-close">关闭</i></button>
+        </dd>
+    </dl>
+    <?php echo Html::endForm(); ?>

@@ -15,7 +15,7 @@ use Tools\Labels;
  * Version      :   1.0
  *
  * @var \Admin\Components\Controller $this
- * @var \Admin\Models\User $model
+ * @var \Admin\Models\Notice $model
  */
 echo Html::beginForm('', 'post', [
     'id' => 'ajaxForm',

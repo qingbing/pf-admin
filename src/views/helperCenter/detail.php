@@ -3,36 +3,41 @@
 namespace Admin\Controllers;
 
 // 引用类
+use FormGenerator;
+use Html;
+use Tools\Labels;
 
 /**
  * Created by generate tool of phpcorner.
  * Link         :   http://www.phpcorner.net/
  * User         :   qingbing
- * Date         :   2019-05-14
+ * Date         :   2019-05-15
  * Version      :   1.0
  *
  * @var \Admin\Components\Controller $this
- * @var \Admin\Models\Notice $model
+ * @var \Admin\Models\HelperCenter $model
  */
 $options = [
-    'id',
+    'is_category' => [
+        'callable' => ['\Tools\Labels', 'YesNo'],
+        'type' => 'view',
+    ],
+    'label',
     'subject',
     'keywords',
     'description',
     'sort_order',
-    'is_publish' => [
-        'callable' => ['\Tools\Labels', 'YesNo'],
+    'is_enable' => [
+        'callable' => ['\Tools\Labels', 'enable'],
         'type' => 'view',
     ],
-    'publish_time',
-    'expire_time',
-    'read_times',
     'content',
     'create_time',
     'uid',
     'ip',
     'update_time',
 ];
+
 // 填写表单
 $this->widget('\Widgets\FormGenerator', [
     'model' => $model,
