@@ -61,11 +61,12 @@ class StaticContent extends DbModel
         return [
             ['sort_order', 'required'],
             ['sort_order, uid', 'numerical', 'integerOnly' => true],
-            ['code, subject, keywords, description', 'string', 'maxLength' => 255],
+            ['code', 'string', 'maxLength' => 30],
+            ['subject, keywords, description', 'string', 'maxLength' => 255],
             ['x_flag', 'string', 'maxLength' => 20],
             ['ip', 'string', 'maxLength' => 15],
             ['content', 'string'],
-            ['create_time, operate_time', 'safe'],
+            ['create_time, update_time', 'safe'],
         ];
     }
 

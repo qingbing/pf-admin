@@ -1,25 +1,23 @@
 <?php
 // 申明命名空间
 namespace Admin\Models;
-
 // 引用类
 use Abstracts\DbModel;
-use Admin\Components\Pub;
-use Helper\Format;
 
 /**
  * Created by generate tool of phpcorner.
  * Link         :   http://www.phpcorner.net/
  * User         :   qingbing
- * Date         :   2019-05-15
+ * Date         :   2019-05-17
  * Version      :   1.0
  *
  * This is the model class for table "pub_helper_center".
  * The followings are the available columns in table 'pub_helper_center':
- *
+ * 
  * @property integer id
  * @property integer parent_id
  * @property string label
+ * @property string code
  * @property string subject
  * @property string keywords
  * @property string description
@@ -93,6 +91,7 @@ class HelperCenter extends DbModel
             'id' => '自增ID',
             'parent_id' => '父级ID',
             'label' => '显示标签',
+            'code' => '引用代码',
             'subject' => '主题',
             'keywords' => 'seo的keywords',
             'description' => 'seo的description',
