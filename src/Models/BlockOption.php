@@ -1,8 +1,10 @@
 <?php
 // 申明命名空间
 namespace Admin\Models;
+
 // 引用类
 use Abstracts\DbModel;
+use DbSupports\Builder\Criteria;
 use Helper\Exception;
 use Helper\Format;
 use Tools\UploadFile;
@@ -95,6 +97,31 @@ class BlockOption extends DbModel
             'create_time' => '创建时间',
             'update_time' => '更新时间',
         ];
+    }
+
+    /**
+     * 验证通过后执行
+     * @throws \Exception
+     */
+    protected function afterValidate()
+    {
+        $criteria = new Criteria();
+        $criteria->addWhere('`key`=:key')
+            ->addParam(':key', $this->key);
+
+        $criteria->addWhere('`label`=:label')
+            ->addParam(':label', $this->label);
+        if ($this->getIsNewRecord()) {
+            if (self::model()->count($criteria) > 0) {
+                $this->addError('label', "链接显示名称\"{$this->label}\"已经存在");
+            }
+        } else {
+            $criteria->addWhere('`id`!=:id')
+                ->addParam(':id', $this->id);
+            if (self::model()->count($criteria) > 0) {
+                $this->addError('label', "链接显示名称\"{$this->label}\"已经存在");
+            }
+        }
     }
 
     /**

@@ -5,6 +5,7 @@ namespace Admin\Models;
 // 引用类
 use Abstracts\DbModel;
 use Admin\Components\Pub;
+use DbSupports\Builder\Criteria;
 use Helper\Format;
 
 /**
@@ -106,6 +107,19 @@ class StaticContent extends DbModel
      */
     protected function beforeSave()
     {
+        // 引用代码验证
+        $criteria = new Criteria();
+        if (!$this->getIsNewRecord()) {
+            $criteria->addWhere('`id`!=:id')
+                ->addParam(':id', $this->id);
+        }
+        $criteria->addWhere('`code`=:code')
+            ->addParam(':code', $this->code);
+        if ($this->count($criteria) > 0) {
+            $this->addError('code', "引用代码{$this->code}已经存在");
+            return false;
+        }
+        // 其他信息准备
         $datetime = Format::datetime();
         $this->setAttributes([
             'uid' => Pub::getUser()->getUid(),

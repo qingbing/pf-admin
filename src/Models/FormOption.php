@@ -1,8 +1,10 @@
 <?php
 // 申明命名空间
 namespace Admin\Models;
+
 // 引用类
 use Abstracts\DbModel;
+use DbSupports\Builder\Criteria;
 
 /**
  * Created by generate tool of phpcorner.
@@ -13,7 +15,7 @@ use Abstracts\DbModel;
  *
  * This is the model class for table "pub_form_option".
  * The followings are the available columns in table 'pub_form_option':
- * 
+ *
  * @property integer id
  * @property string key
  * @property string code
@@ -74,8 +76,8 @@ class FormOption extends DbModel
             ['sort_order, input_type, allow_empty, is_enable', 'required'],
             ['sort_order, allow_empty, min, max, is_enable', 'numerical', 'integerOnly' => true],
             ['key, code, label, default, description, compare_field, pattern, tip_msg, error_msg, empty_msg, min_msg, max_msg, file_extensions, callback, ajax_url, tip_id, css_id, css_class, css_style', 'string', 'maxLength' => 255],
-            ['input_type', 'in', 'range' => ['text','select','textarea','editor','checkbox','checkbox_list','radio_list','password','hidden','file']],
-            ['data_type', 'in', 'range' => ['required','email','url','ip','phone','mobile','contact','fax','zip','time','date','username','password','compare','preg','string','numeric','integer','money','file','select','choice','checked']],
+            ['input_type', 'in', 'range' => ['text', 'select', 'textarea', 'editor', 'checkbox', 'checkbox_list', 'radio_list', 'password', 'hidden', 'file']],
+            ['data_type', 'in', 'range' => ['required', 'email', 'url', 'ip', 'phone', 'mobile', 'contact', 'fax', 'zip', 'time', 'date', 'username', 'password', 'compare', 'preg', 'string', 'numeric', 'integer', 'money', 'file', 'select', 'choice', 'checked']],
             ['input_data', 'safe'],
         ];
     }
@@ -125,5 +127,43 @@ class FormOption extends DbModel
             'css_style' => '输入表单元素的样式',
             'is_enable' => '表单项目启用状态',
         ];
+    }
+
+    /**
+     * 验证通过后执行
+     * @throws \Exception
+     */
+    protected function afterValidate()
+    {
+        $criteria = new Criteria();
+        $criteria->addWhere('`key`=:key')
+            ->addParam(':key', $this->key);
+
+        $cCode = clone($criteria);
+        $cCode->addWhere('`code`=:code')
+            ->addParam(':code', $this->code);
+
+        $cLabel = clone($criteria);
+        $cLabel->addWhere('`label`=:label')
+            ->addParam(':label', $this->label);
+        if ($this->getIsNewRecord()) {
+            if (self::model()->count($cCode) > 0) {
+                $this->addError('code', "该表单配置选项中已经存在\"{$this->code}\"");
+            }
+            if (self::model()->count($cLabel) > 0) {
+                $this->addError('label', "该表单配置选项中已经存在\"{$this->label}\"");
+            }
+        } else {
+            $cCode->addWhere('`id`!=:id')
+                ->addParam(':id', $this->id);
+            $cLabel->addWhere('`id`!=:id')
+                ->addParam(':id', $this->id);
+            if (self::model()->count($cCode) > 0) {
+                $this->addError('code', "该表单配置选项中已经存在\"{$this->code}\"");
+            }
+            if (self::model()->count($cLabel) > 0) {
+                $this->addError('label', "该表单配置选项中已经存在\"{$this->label}\"");
+            }
+        }
     }
 }

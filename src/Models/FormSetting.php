@@ -58,7 +58,7 @@ class FormSetting extends \Tools\FormSetting
     /**
      * 返回删除结果
      * @return int
-     * @throws Exception
+     * @throws \Exception
      */
     public function reset()
     {

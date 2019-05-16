@@ -4,6 +4,7 @@ namespace Admin\Models;
 
 // 引用类
 use Abstracts\DbModel;
+use DbSupports\Builder\Criteria;
 
 /**
  * Created by generate tool of phpcorner.
@@ -18,6 +19,7 @@ use Abstracts\DbModel;
  * @property integer id
  * @property integer parent_id
  * @property integer is_category
+ * @property string flag
  * @property string label
  * @property string url
  * @property integer sort_order
@@ -56,7 +58,7 @@ class Nav extends DbModel
         return [
             ['parent_id, is_category, sort_order, is_enable, is_open, is_blank', 'required'],
             ['parent_id, is_category, sort_order, is_enable, is_open, is_blank', 'numerical', 'integerOnly' => true],
-            ['label, url', 'string', 'maxLength' => 50],
+            ['flag, label, url', 'string', 'maxLength' => 50],
             ['description', 'string', 'maxLength' => 255],
         ];
     }
@@ -82,6 +84,7 @@ class Nav extends DbModel
             'id' => '自增ID',
             'parent_id' => '父级ID',
             'is_category' => '是否分类导航',
+            'flag' => '标记',
             'label' => '显示标签',
             'url' => '导航url',
             'sort_order' => '排序',
@@ -90,6 +93,38 @@ class Nav extends DbModel
             'is_blank' => '是否新开窗口',
             'description' => '描述',
         ];
+    }
+
+    /**
+     * 在数据保存之前执行
+     * @return bool
+     * @throws \Exception
+     */
+    protected function beforeSave()
+    {
+        // 查询组件准备
+        $criteria = new Criteria();
+        if (!$this->getIsNewRecord()) {
+            $criteria->addWhere('`id`!=:id')
+                ->addParam(':id', $this->id);
+        }
+        // 标签验证
+        $cLabel = clone $criteria;
+        $cLabel->addWhere('`label`=:label')
+            ->addParam(':label', $this->label);
+        if ($this->count($cLabel) > 0) {
+            $this->addError('label', "显示标签{$this->label}已经存在");
+            return false;
+        }
+        // 标志验证
+        $cFlag = clone $criteria;
+        $cFlag->addWhere('`flag`=:flag')
+            ->addParam(':flag', $this->flag);
+        if ($this->count($cFlag) > 0) {
+            $this->addError('flag', "导航标记{$this->flag}已经存在");
+            return false;
+        }
+        return true;
     }
 
     /**
