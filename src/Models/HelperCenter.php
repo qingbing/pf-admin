@@ -120,20 +120,24 @@ class HelperCenter extends DbModel
      */
     protected function beforeSave()
     {
-        $criteria = new Criteria();
-        $criteria->addWhere('`code`=:code')
-            ->addParam(':code', $this->code);
-        $datetime = Format::datetime();
-        if (!$this->getIsNewRecord()) {
-            $criteria->addWhere('`id`!=:id')
-                ->addParam(':id', $this->id);
-        } else {
-            // 赋值创建时间
-            $this->create_time = $datetime;
+        if ('' != $this->code) {
+            $criteria = new Criteria();
+            $criteria->addWhere('`code`=:code')
+                ->addParam(':code', $this->code);
+            if (!$this->getIsNewRecord()) {
+                $criteria->addWhere('`id`!=:id')
+                    ->addParam(':id', $this->id);
+            }
+            if ($this->count($criteria) > 0) {
+                $this->addError('code', "引用代码{$this->code}已经存在");
+                return false;
+            }
         }
-        if ($this->count($criteria) > 0) {
-            $this->addError('code', "引用代码{$this->code}已经存在");
-            return false;
+
+        // 赋值操作信息
+        $datetime = Format::datetime();
+        if ($this->getIsNewRecord()) {
+            $this->create_time = $datetime;
         }
         $this->setAttributes([
             'uid' => Pub::getUser()->getUid(),
