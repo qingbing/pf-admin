@@ -10,7 +10,7 @@ use DbSupports\Builder\Criteria;
  * Created by generate tool of phpcorner.
  * Link         :   http://www.phpcorner.net/
  * User         :   qingbing
- * Date         :   2019-03-11
+ * Date         :   2019-05-17
  * Version      :   1.0
  *
  * This is the model class for table "pub_form_option".
@@ -75,10 +75,12 @@ class FormOption extends DbModel
         return [
             ['sort_order, input_type, allow_empty, is_enable', 'required'],
             ['sort_order, allow_empty, min, max, is_enable', 'numerical', 'integerOnly' => true],
-            ['key, code, label, default, description, compare_field, pattern, tip_msg, error_msg, empty_msg, min_msg, max_msg, file_extensions, callback, ajax_url, tip_id, css_id, css_class, css_style', 'string', 'maxLength' => 255],
+            ['key, code, label, default, compare_field, callback, tip_id, css_id, css_class', 'string', 'maxLength' => 100],
+            ['description', 'string', 'maxLength' => 255],
+            ['pattern, tip_msg, error_msg, empty_msg, min_msg, max_msg, file_extensions, ajax_url, css_style', 'string', 'maxLength' => 200],
             ['input_type', 'in', 'range' => ['text', 'select', 'textarea', 'editor', 'checkbox', 'checkbox_list', 'radio_list', 'password', 'hidden', 'file']],
             ['data_type', 'in', 'range' => ['required', 'email', 'url', 'ip', 'phone', 'mobile', 'contact', 'fax', 'zip', 'time', 'date', 'username', 'password', 'compare', 'preg', 'string', 'numeric', 'integer', 'money', 'file', 'select', 'choice', 'checked']],
-            ['input_data', 'safe'],
+            ['input_data', 'string'],
         ];
     }
 
