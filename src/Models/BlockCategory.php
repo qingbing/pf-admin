@@ -14,7 +14,7 @@ use Tools\UploadManager;
  * Created by generate tool of phpcorner.
  * Link         :   http://www.phpcorner.net/
  * User         :   qingbing
- * Date         :   2019-03-18
+ * Date         :   2019-05-17
  * Version      :   1.0
  *
  * This is the model class for table "pub_block_category".
@@ -63,10 +63,11 @@ class BlockCategory extends DbModel
         return [
             ['type, sort_order, is_open, is_enable', 'required'],
             ['sort_order, is_open, is_enable', 'numerical', 'integerOnly' => true],
-            ['key, name, description', 'string', 'maxLength' => 255],
-            ['type', 'string', 'maxLength' => 20],
-            ['x_flag', 'string', 'maxLength' => 50],
-            ['src, content', 'string'],
+            ['key, name', 'string', 'maxLength' => 100],
+            ['type, x_flag', 'string', 'maxLength' => 20],
+            ['description', 'string', 'maxLength' => 255],
+            ['src', 'string', 'maxLength' => 200],
+            ['content', 'string'],
             ['create_time, update_time', 'safe'],
         ];
     }

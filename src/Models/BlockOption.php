@@ -14,7 +14,7 @@ use Tools\UploadManager;
  * Created by generate tool of phpcorner.
  * Link         :   http://www.phpcorner.net/
  * User         :   qingbing
- * Date         :   2019-03-18
+ * Date         :   2019-05-17
  * Version      :   1.0
  *
  * This is the model class for table "pub_block_option".
@@ -63,7 +63,9 @@ class BlockOption extends DbModel
         return [
             ['sort_order, is_open, is_enable, is_blank', 'required'],
             ['sort_order, is_open, is_enable, is_blank', 'numerical', 'integerOnly' => true],
-            ['key, label, link, src, description', 'string', 'maxLength' => 255],
+            ['key, label', 'string', 'maxLength' => 100],
+            ['link, src', 'string', 'maxLength' => 200],
+            ['description', 'string', 'maxLength' => 255],
             ['create_time, update_time', 'safe'],
         ];
     }
@@ -85,7 +87,7 @@ class BlockOption extends DbModel
     {
         return [
             'id' => '自增ID',
-            'ckey' => '所属区块标识',
+            'key' => '所属区块标识',
             'label' => '链接显示名称',
             'link' => '链接地址',
             'src' => '图片地址',
