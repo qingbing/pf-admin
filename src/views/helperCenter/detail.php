@@ -3,9 +3,6 @@
 namespace Admin\Controllers;
 
 // 引用类
-use FormGenerator;
-use Html;
-use Tools\Labels;
 
 /**
  * Created by generate tool of phpcorner.
@@ -17,6 +14,18 @@ use Tools\Labels;
  * @var \Admin\Components\Controller $this
  * @var \Admin\Models\HelperCenter $model
  */
+?>
+<dl class="form-group row">
+    <dt class="col-md-3 col-sm-3 col-lg-3 control-label"><label for="HelperCenter_create_time">访问Url</label>:</dt>
+    <dd class="col-md-9 col-sm-9 col-lg-9 form-control-static"><pre><?php
+            $url = $this->createUrl('//helper/default/index', ['id' => $model->id]);
+            if (!empty($model->code)) {
+                $url .= "\n" . $this->createUrl('//helper/default/index', ['code' => $model->code]);
+            }
+            echo $url; ?></pre>
+    </dd>
+</dl>
+<?php
 $options = [
     'is_category' => [
         'callable' => ['\Tools\Labels', 'YesNo'],
