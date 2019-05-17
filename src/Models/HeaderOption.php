@@ -1,6 +1,7 @@
 <?php
 // 申明命名空间
 namespace Admin\Models;
+
 // 引用类
 use Abstracts\DbModel;
 use DbSupports\Builder\Criteria;
@@ -9,7 +10,7 @@ use DbSupports\Builder\Criteria;
  * Created by generate tool of phpcorner.
  * Link         :   http://www.phpcorner.net/
  * User         :   qingbing
- * Date         :   2019-03-06
+ * Date         :   2019-05-17
  * Version      :   1.0
  *
  * This is the model class for table "pub_header_option".
@@ -58,8 +59,10 @@ class HeaderOption extends DbModel
         return [
             ['default, sort_order, is_required, is_default, is_enable, is_sortable', 'required'],
             ['sort_order, is_required, is_default, is_enable, is_sortable', 'numerical', 'integerOnly' => true],
-            ['key, code, label, default, css_class', 'string', 'maxLength' => 255],
+            ['key, code, label', 'string', 'maxLength' => 100],
+            ['default', 'string', 'maxLength' => 255],
             ['width', 'string', 'maxLength' => 20],
+            ['css_class', 'string', 'maxLength' => 30],
         ];
     }
 

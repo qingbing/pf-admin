@@ -1,6 +1,7 @@
 <?php
 // 申明命名空间
 namespace Admin\Models;
+
 // 引用类
 use Abstracts\DbModel;
 
@@ -8,7 +9,7 @@ use Abstracts\DbModel;
  * Created by generate tool of phpcorner.
  * Link         :   http://www.phpcorner.net/
  * User         :   qingbing
- * Date         :   2019-03-06
+ * Date         :   2019-05-17
  * Version      :   1.0
  *
  * This is the model class for table "pub_header_category".
@@ -50,8 +51,8 @@ class HeaderCategory extends DbModel
         return [
             ['sort_order, is_open', 'required'],
             ['sort_order, is_open', 'numerical', 'integerOnly' => true],
-            ['key, name, description', 'string', 'maxLength' => 255],
-
+            ['key, name', 'string', 'maxLength' => 100],
+            ['description', 'string', 'maxLength' => 255],
             ['name', self::UNIQUE],
         ];
     }
