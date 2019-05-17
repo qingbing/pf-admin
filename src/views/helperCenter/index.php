@@ -32,6 +32,7 @@ use Tools\Labels;
     <thead>
     <tr>
         <th class="text-center" width="120px">标签</th>
+        <th class="text-center" width="80px">引用代码</th>
         <th class="text-center" width="120px">主题</th>
         <th class="text-center" width="60px">排序</th>
         <th class="text-center" width="60px">启用状态</th>
@@ -49,6 +50,7 @@ use Tools\Labels;
         <tr data-post-data='<?php echo Coding::json_encode(['id' => $model->id], true); ?>'
             data-tip=".w_display_status">
             <td class="text-left" data-name="label"><?php echo $model->label; ?></td>
+            <td class="text-left" data-name="code"><?php echo $model->code; ?></td>
             <td class="text-left" data-name="subject"><?php echo $model->subject; ?></td>
             <td class="text-center" data-name="sort_order"><?php echo $model->sort_order; ?></td>
             <td class="text-center" data-name="is_enable">

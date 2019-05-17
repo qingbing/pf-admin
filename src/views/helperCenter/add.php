@@ -39,6 +39,14 @@ $options = [
         'tip_msg' => '请输入显示标签',
         'allow_empty' => false,
     ),
+    'code' => array(
+        'code' => 'code',
+        'input_type' => FormGenerator::INPUT_TYPE_TEXT,
+        'data_type' => FormGenerator::DATA_TYPE_STRING,
+        'ajax_url' => $this->createUrl('uniqueCode'),
+        'tip_msg' => '请输入代码',
+        'allow_empty' => true,
+    ),
     'subject' => array(
         'code' => 'subject',
         'input_type' => FormGenerator::INPUT_TYPE_TEXTAREA,

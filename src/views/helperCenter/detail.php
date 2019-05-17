@@ -23,6 +23,7 @@ $options = [
         'type' => 'view',
     ],
     'label',
+    'code',
     'subject',
     'keywords',
     'description',

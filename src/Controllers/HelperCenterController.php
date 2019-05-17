@@ -300,4 +300,33 @@ class HelperCenterController extends Controller
             ->setOrder('`sort_order` ASC');
         return HelperCenter::model()->findAll($criteria);
     }
+
+    /**
+     * 验证帮助中心代码的唯一性
+     * @throws \Exception
+     */
+    public function actionUniqueCode()
+    {
+        // 获取参数
+        $fixer = $this->getActionParams();
+        if (empty($fixer['param'])) {
+            $this->success("引用代码\"{$fixer['param']}\"可用");
+        }
+        // 组装验证内容
+        $criteria = new Criteria();
+        $criteria->addWhere('`code`=:code')
+            ->addParam(':code', $fixer['param']);
+        if (isset($fixer['id']) && $fixer['id']) {
+            $criteria->addWhere('`id`!=:id')
+                ->addParam(':id', $fixer['id']);
+        }
+        $count = HelperCenter::model()->count($criteria);
+        // 返回验证结果
+        $this->openLog = false;
+        if ($count > 0) {
+            $this->failure("引用代码\"{$fixer['param']}\"已经存在");
+        } else {
+            $this->success("引用代码\"{$fixer['param']}\"可用");
+        }
+    }
 }

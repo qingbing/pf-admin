@@ -1,8 +1,12 @@
 <?php
 // 申明命名空间
 namespace Admin\Models;
+
 // 引用类
 use Abstracts\DbModel;
+use Admin\Components\Pub;
+use DbSupports\Builder\Criteria;
+use Helper\Format;
 
 /**
  * Created by generate tool of phpcorner.
@@ -13,7 +17,7 @@ use Abstracts\DbModel;
  *
  * This is the model class for table "pub_helper_center".
  * The followings are the available columns in table 'pub_helper_center':
- * 
+ *
  * @property integer id
  * @property integer parent_id
  * @property string label
@@ -61,8 +65,9 @@ class HelperCenter extends DbModel
         return [
             ['parent_id, sort_order, is_enable, is_category', 'required'],
             ['parent_id, sort_order, is_enable, is_category, uid', 'numerical', 'integerOnly' => true],
-            ['label', 'string', 'maxLength' => 30],
-            ['subject, keywords, description', 'string', 'maxLength' => 255],
+            ['label, code', 'string', 'maxLength' => 30],
+            ['subject', 'string', 'maxLength' => 100],
+            ['keywords, description', 'string', 'maxLength' => 255],
             ['x_flag', 'string', 'maxLength' => 20],
             ['ip', 'string', 'maxLength' => 15],
             ['content', 'string'],
@@ -115,16 +120,26 @@ class HelperCenter extends DbModel
      */
     protected function beforeSave()
     {
+        $criteria = new Criteria();
+        $criteria->addWhere('`code`=:code')
+            ->addParam(':code', $this->code);
         $datetime = Format::datetime();
+        if (!$this->getIsNewRecord()) {
+            $criteria->addWhere('`id`!=:id')
+                ->addParam(':id', $this->id);
+        } else {
+            // 赋值创建时间
+            $this->create_time = $datetime;
+        }
+        if ($this->count($criteria) > 0) {
+            $this->addError('code', "引用代码{$this->code}已经存在");
+            return false;
+        }
         $this->setAttributes([
             'uid' => Pub::getUser()->getUid(),
             'ip' => Pub::getApp()->getRequest()->getUserHostAddress(),
         ]);
         $this->setAttribute('update_time', $datetime);
-        if ($this->getIsNewRecord()) {
-            // 插入
-            $this->create_time = $datetime;
-        }
         return true;
     }
 
