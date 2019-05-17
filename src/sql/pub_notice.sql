@@ -7,8 +7,8 @@
 
 CREATE TABLE IF NOT EXISTS `pub_notice` (
   `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '自增ID',
-  `subject` varchar(255) NOT NULL COMMENT '主题',
-  `keywords` varchar(255) DEFAULT NULL COMMENT 'seo的keywords',
+  `subject` varchar(100) NOT NULL COMMENT '主题',
+  `keywords` varchar(100) DEFAULT NULL COMMENT 'seo的keywords',
   `description` varchar(255) DEFAULT NULL COMMENT 'seo的description',
   `sort_order` tinyint(4) NOT NULL DEFAULT '0' COMMENT '排序',
   `content` text COMMENT '内容',

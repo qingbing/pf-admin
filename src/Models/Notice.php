@@ -1,6 +1,7 @@
 <?php
 // 申明命名空间
 namespace Admin\Models;
+
 // 引用类
 use Abstracts\DbModel;
 use Admin\Components\Pub;
@@ -10,12 +11,12 @@ use Helper\Format;
  * Created by generate tool of phpcorner.
  * Link         :   http://www.phpcorner.net/
  * User         :   qingbing
- * Date         :   2019-05-14
+ * Date         :   2019-05-17
  * Version      :   1.0
  *
  * This is the model class for table "pub_notice".
  * The followings are the available columns in table 'pub_notice':
- * 
+ *
  * @property integer id
  * @property string subject
  * @property string keywords
@@ -62,7 +63,8 @@ class Notice extends DbModel
         return [
             ['sort_order, read_times, is_publish, expire_time', 'required'],
             ['sort_order, read_times, is_publish, uid', 'numerical', 'integerOnly' => true],
-            ['subject, keywords, description', 'string', 'maxLength' => 255],
+            ['subject, keywords', 'string', 'maxLength' => 100],
+            ['description', 'string', 'maxLength' => 255],
             ['x_flag', 'string', 'maxLength' => 20],
             ['ip', 'string', 'maxLength' => 15],
             ['content, publish_time, expire_time', 'string'],
