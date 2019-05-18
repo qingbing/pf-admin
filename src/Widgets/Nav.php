@@ -10,10 +10,10 @@ namespace Admin\Widgets;
 
 
 use Abstracts\OutputCache;
+use Admin\Components\NavSetting;
 
 class Nav extends OutputCache
 {
-    public $ttl = 0; // todo delete
     /* @var string nav标记 */
     public $navFlag;
 
@@ -36,14 +36,9 @@ class Nav extends OutputCache
      */
     protected function generateContent()
     {
-        $className = '\Admin\Components\UserNavSetting';
-        if (!class_exists($className)) {
-            $className = '\Admin\Components\NavSetting';
-        }
-
         $this->render('nav', [
             'navFlag' => $this->navFlag,
-            'navs' => $className::getInstance()->getNavs(),
+            'navs' => NavSetting::getInstance()->getNavs(),
         ]);
     }
 }

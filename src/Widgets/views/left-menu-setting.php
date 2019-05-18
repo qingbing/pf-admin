@@ -5,17 +5,6 @@ $module = \Admin\Components\Pub::getModule();
 <div class="w-menu" data-name="admin-left-menu-setting" data-share="false">
 
     <?php if ($isSuper) { ?>
-        <!--        --><?php //if (!empty($accessMods)) { ?>
-        <!--            <dl>-->
-        <!--                <dt>角色管理</dt>-->
-        <!--                --><?php //foreach ($accessMods as $key => $name) { ?>
-        <!--                    <dd>-->
-        <!--                        <a href="--><?php //echo $module->createUrl('accessRole/index', ['key' => $key]); ?><!--">--><?php //echo $name; ?><!--</a>-->
-        <!--                    </dd>-->
-        <!--                --><?php //} ?>
-        <!--            </dl>-->
-        <!--        --><?php //} ?>
-
         <?php if (!empty($siteSetting)) { ?>
             <dl>
                 <dt>参数配置</dt>

@@ -9,8 +9,6 @@
 namespace Admin\Widgets;
 
 
-use Admin\Components\Pub;
-
 class LeftMenuHome extends \Admin\Components\LeftMenu
 {
     /* @var string nav标记 */

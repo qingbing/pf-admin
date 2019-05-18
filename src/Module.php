@@ -9,6 +9,7 @@
 namespace Admin;
 
 
+use Admin\Components\AfterLogin;
 use Admin\Components\Pub;
 
 class Module extends \Render\Abstracts\Module
@@ -54,6 +55,10 @@ class Module extends \Render\Abstracts\Module
             if ('login' !== strtolower($controller->getId())) {
                 // 除了 login 控制器，其他控制器必须登录
                 Pub::getUser()->loginRequired();
+            }
+            $className = "\Admin\CustomAfterLogin";
+            if (class_exists($className) && $className instanceof AfterLogin) {
+                $className::getInstance();
             }
             return true;
         } else {

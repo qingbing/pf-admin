@@ -42,6 +42,33 @@ class Log extends OperateLog
     // todo
     const OPERATE_TYPE_ACCESS = 'access';
 
+
+    private static $_types = [
+        self::OPERATE_TYPE_LOGIN => '登录日志',
+        self::OPERATE_TYPE_PERSONAL => '个人日志',
+        self::OPERATE_TYPE_MATE => '管理员管理',
+        self::OPERATE_TYPE_TABLE_HEADER => '表头设置',
+        self::OPERATE_TYPE_FORM_SETTING => '表单配置',
+        self::OPERATE_TYPE_REPLACE_SETTING => '替换模板',
+        self::OPERATE_TYPE_NAV => '导航管理',
+        self::OPERATE_TYPE_BLOCK => '区块管理',
+        self::OPERATE_TYPE_STATIC_CONTENT => '静态内容',
+        self::OPERATE_TYPE_NOTICE => '公告管理',
+        self::OPERATE_TYPE_HELPER_CENTER => '帮助中心',
+
+        self::OPERATE_TYPE_ACCESS => '权限控制',
+    ];
+
+    /**
+     * 添加一种日志类型
+     * @param $flag
+     * @param $label
+     */
+    static public function addType($flag, $label)
+    {
+        self::$_types[$flag] = $label;
+    }
+
     /**
      * 是或否
      * @param bool|false $withAll
@@ -49,26 +76,11 @@ class Log extends OperateLog
      */
     static public function type($withAll = false)
     {
-        $data = [
-            '' => '全部',
-            self::OPERATE_TYPE_LOGIN => '登录日志',
-            self::OPERATE_TYPE_PERSONAL => '个人日志',
-            self::OPERATE_TYPE_MATE => '管理员管理',
-            self::OPERATE_TYPE_TABLE_HEADER => '表头设置',
-            self::OPERATE_TYPE_FORM_SETTING => '表单配置',
-            self::OPERATE_TYPE_REPLACE_SETTING => '替换模板',
-            self::OPERATE_TYPE_NAV => '导航管理',
-            self::OPERATE_TYPE_BLOCK => '区块管理',
-            self::OPERATE_TYPE_STATIC_CONTENT => '静态内容',
-            self::OPERATE_TYPE_NOTICE => '公告管理',
-
-            self::OPERATE_TYPE_HELPER_CENTER => '帮助中心',
-
-            self::OPERATE_TYPE_ACCESS => '权限控制',
-        ];
         if (!$withAll) {
-            array_shift($data);
+            return self::$_types;
         }
-        return $data;
+        return array_merge([
+            '' => '全部',
+        ], self::$_types);
     }
 }
