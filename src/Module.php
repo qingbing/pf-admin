@@ -8,8 +8,6 @@
 
 namespace Admin;
 
-
-use Admin\Components\AfterLogin;
 use Admin\Components\Pub;
 
 class Module extends \Render\Abstracts\Module
@@ -57,7 +55,8 @@ class Module extends \Render\Abstracts\Module
                 Pub::getUser()->loginRequired();
             }
             $className = "\Admin\CustomAfterLogin";
-            if (class_exists($className) && $className instanceof AfterLogin) {
+            if (class_exists($className)) {
+                /* @var \Abstracts\SingleTon $className */
                 $className::getInstance();
             }
             return true;
