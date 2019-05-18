@@ -19,6 +19,8 @@ class FormCateController extends Controller
 {
     /* @var mixed 控制器的layout */
     public $layout = '/layouts/modal';
+    /* @var string nav标记 */
+    public $navFlag = 'setting';
 
     /**
      * 在执行action之前调用，可以用该函数来终止向下运行

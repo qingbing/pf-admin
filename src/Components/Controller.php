@@ -11,6 +11,9 @@ namespace Admin\Components;
 
 class Controller extends \Render\Abstracts\Controller
 {
+    /* @var string nav标记 */
+    public $navFlag = 'home';
+
     /* @var boolean 是否开启操作日志，默认关闭 */
     protected $openLog = false;
     /* @var string 日志类型 */

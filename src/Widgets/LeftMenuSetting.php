@@ -9,33 +9,12 @@
 namespace Admin\Widgets;
 
 
-use Abstracts\OutputCache;
 use Admin\Components\Pub;
 
-class LeftMenu extends OutputCache
+class LeftMenuSetting extends \Admin\Components\LeftMenu
 {
-    private $_isSuper;
-
-    /**
-     * @throws \Helper\Exception
-     */
-    protected function begin()
-    {
-        $this->_isSuper = Pub::getUser()->getIsSuper();
-        parent::begin();
-    }
-
-    /**
-     * 在 @link init() 之前运行
-     * @return string|array|mixed
-     */
-    protected function generateId()
-    {
-        return [
-            'admin.widgets.leftMenu.',
-            ($this->_isSuper ? 'y' : 'n')
-        ];
-    }
+    /* @var string nav标记 */
+    public $navFlag = 'setting';
 
     /**
      * 获取网站设置菜单，通过表单配置管理
@@ -70,22 +49,16 @@ class LeftMenu extends OutputCache
             ->queryAll();
     }
 
-
     /**
      * 构建 cache-content ： 在 @link init() 之后运行
-     * @return mixed
      * @throws \Exception
      */
     protected function generateContent()
     {
-//        $accessMods = U::keyValue('access-mod');
-//        $navMods = U::keyValue('nav-mod');
-        $this->render('left-menu', [
-            'isSuper' => $this->_isSuper,
+        $this->render('left-menu-setting', [
+            'isSuper' => $this->isSuper,
             'siteSetting' => $this->getSiteSetting(),
             'replaceSetting' => $this->getReplaceSetting(),
-//            'accessMods' => $accessMods,
-//            'navMods' => $navMods,
         ]);
     }
 }

@@ -21,6 +21,9 @@ class MateController extends Controller
     /* @var mixed 控制器的layout */
     public $layout = '/layouts/modal';
     /* @var boolean 是否开启操作日志，默认关闭 */
+    /* @var string nav标记 */
+    public $navFlag = 'home';
+
     protected $openLog = true;
     /* @var string 日志类型 */
     protected $logType = Log::OPERATE_TYPE_MATE;

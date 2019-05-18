@@ -1,6 +1,7 @@
 <?php
 // 申明命名空间
 namespace Admin\Controllers;
+
 // 引用类
 use Admin\Components\Controller;
 use Admin\Components\Log;
@@ -16,6 +17,9 @@ use DbSupports\Builder\Criteria;
  */
 class LogController extends Controller
 {
+    /* @var string nav标记 */
+    public $navFlag = 'home';
+
     /* @var boolean 是否超管 */
     protected $isSuper;
 

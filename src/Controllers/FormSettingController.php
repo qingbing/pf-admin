@@ -17,6 +17,9 @@ use Admin\Models\FormSetting;
  */
 class FormSettingController extends Controller
 {
+    /* @var string nav标记 */
+    public $navFlag = 'setting';
+
     /* @var boolean 是否开启操作日志，默认关闭 */
     protected $openLog = true;
     /* @var string 日志类型 */

@@ -1,6 +1,7 @@
 <?php
 // 申明命名空间
 namespace Admin\Controllers;
+
 // 引用类
 use Admin\Components\Controller;
 
@@ -13,6 +14,9 @@ use Admin\Components\Controller;
  */
 class ContactController extends Controller
 {
+    /* @var string nav标记 */
+    public $navFlag = 'home';
+
     /**
      * 默认action
      * @throws \Helper\Exception

@@ -1,6 +1,7 @@
 <?php
 // 申明命名空间
 namespace Admin\Controllers;
+
 // 引用类
 use Admin\Components\Controller;
 use Admin\Components\Pub;
@@ -14,6 +15,9 @@ use Admin\Components\Pub;
  */
 class DefaultController extends Controller
 {
+    /* @var string nav标记 */
+    public $navFlag = 'home';
+
     /**
      * @throws \Exception
      */
