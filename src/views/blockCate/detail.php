@@ -17,7 +17,7 @@ use Admin\Models\BlockCategory;
  */
 $options = [
     'type' => [
-        'callable' => ['\admin\models\BlockCategory', 'types'],
+        'callable' => ['\Admin\Models\BlockCategory', 'types'],
         'type' => 'view',
     ],
     'name',
