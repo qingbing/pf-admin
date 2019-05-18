@@ -34,7 +34,7 @@ class NavSetting extends SingleTon
      * @param mixed $url
      * @throws \Exception
      */
-    protected function addNav($flag, $label, $url)
+    public function addNav($flag, $label, $url)
     {
         if (is_array($url)) {
             $url = Pub::getModule()->createUrl(array_shift($url), $url);
