@@ -15,7 +15,7 @@ return [
             'cookieKey' => 'dict.user.username',
             'rememberTime' => 864000,
             'namespace' => 'dict.user',
-            'expire' => 1800,
+            'expire' => 600,
             'prefix' => 'dict.user_',
             'loginUrl' => ['dict/login/index'],
             'returnUrl' => ['dict/default/index'],

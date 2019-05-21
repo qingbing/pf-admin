@@ -15,7 +15,7 @@ return [
             'cookieKey' => 'admin.user.username',
             'rememberTime' => 864000,
             'namespace' => 'admin.user',
-            'expire' => 20,
+            'expire' => 600,
             'prefix' => 'admin.user_',
             'loginUrl' => ['admin/login/index'],
             'returnUrl' => ['admin/default/index'],

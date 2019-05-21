@@ -15,6 +15,8 @@ use Admin\Components\UserIdentity;
 
 class LoginForm extends FormModel
 {
+    /* @var string 验证码route */
+    public static $captchaAction = '//admin/login/captcha';
     /* @var string 登录账户 */
     public $username;
     /* @var string 密码 */
@@ -35,7 +37,7 @@ class LoginForm extends FormModel
             ['password', 'password', 'allowEmpty' => false],
             ['password', 'authenticate'],
             ['verifyCode', 'string', 'allowEmpty' => false],
-            ['verifyCode', \Captcha::VALIDATOR, 'captchaAction' => '//admin/login/captcha', 'allowEmpty' => false],
+            ['verifyCode', \Captcha::VALIDATOR, 'captchaAction' => self::$captchaAction, 'allowEmpty' => false],
         ];
     }
 

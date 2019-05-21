@@ -9,6 +9,7 @@
 namespace Admin\Components;
 
 
+use Admin\Models\LoginForm;
 use Admin\Models\User;
 
 class WebUser extends \Abstracts\WebUser
@@ -40,6 +41,8 @@ class WebUser extends \Abstracts\WebUser
                 'login_times' => ($user->login_times + 1),
             ]);
         }
+        // 销毁登录消息
+        \Captcha::getCaptchaAction(LoginForm::$captchaAction)->destroyState();
         parent::afterLogin($identity);
     }
 
