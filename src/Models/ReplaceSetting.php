@@ -183,4 +183,51 @@ class ReplaceSetting extends DbModel
     {
         return $this->_supportFields;
     }
+
+    /**
+     * 在数据保存之前执行
+     * @return bool
+     * @throws \Exception
+     */
+    protected function beforeSave()
+    {
+        // 属性处理
+        $updateAttributes = $this->getUpdatedAttributes();
+        if (in_array('replace_type', $updateAttributes)) {
+            $replace_type = $this->replace_type;
+            if (is_array($replace_type)) {
+                $this->replace_type = implode(',', $replace_type);
+            }
+        }
+        if (in_array('content', $updateAttributes)) {
+            $replace = [];
+            $supportFields = $this->supportFields();
+            foreach (explode(',', $this->replace_type) as $type) {
+                if (isset($supportFields[$type])) {
+                    $replace = array_merge($replace, $supportFields[$type]);
+                }
+            }
+            $replace = array_flip($replace);
+            $content = str_replace($replace, array_keys($replace), $this->content);
+            if (preg_match_all('#\{\{(.*)\::(.*)\}\}#U', $content, $matches)) {
+                $r = array();
+                foreach ($matches[0] as $k => $m) {
+                    $_key = "{{{$matches[1][$k]}}}";
+                    if (in_array($_key, $replace)) {
+                        $replace["{{{$matches[1][$k]}::{$matches[2][$k]}}}"] = $_key;
+                        continue;
+                    }
+                    $replace["{{{$matches[1][$k]}::{$matches[2][$k]}}}"] = $_key;
+                    $r[$matches[1][$k]] = $matches[2][$k];
+                }
+                $this->replace_fields = Coding::json_encode($r, true);
+            } else {
+                $this->replace_fields = Coding::json_encode([]);
+            }
+            if (!empty($replace)) {
+                $this->content = str_replace(array_keys($replace), $replace, $content);
+            }
+        }
+        return true;
+    }
 }
