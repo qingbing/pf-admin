@@ -1,6 +1,7 @@
 <?php
 // 申明命名空间
 namespace Admin\Controllers;
+
 // 引用类
 use Admin\Components\Controller;
 use Admin\Components\Log;
@@ -104,10 +105,10 @@ class PersonalController extends Controller
         if (isset($_POST['FormResetPassword'])) {
             $this->logMessage = '修改密码';
             $model->setAttributes($_POST['FormResetPassword']);
-            if ($model->save()) {
-                $this->success('修改密码成功', -1);
+            if (true === ($res = $model->save())) {
+                $this->success('修改密码成功', ['//admin/login/logout']);
             } else {
-                $this->failure('修改密码失败', $model->getErrors());
+                $this->failure('修改密码失败', $res);
             }
         }
         $user = Pub::getUser()->getUserInfo();
