@@ -21,8 +21,6 @@ echo Html::beginForm('', 'post', [
     'class' => 'w-validate',
     'enctype' => 'multipart/form-data',
 ]);
-// 设置默认新密码为"123456"
-$model->setAttribute('password', '123456');
 $options = [
     'uid',
     'username',
