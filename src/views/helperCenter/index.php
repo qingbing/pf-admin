@@ -49,10 +49,10 @@ use Tools\Labels;
         ?>
         <tr data-post-data='<?php echo Coding::json_encode(['id' => $model->id], true); ?>'
             data-tip=".w_display_status">
-            <td class="text-left" data-name="code"><?php echo $model->code; ?></td>
-            <td class="text-left" data-name="label"><?php echo $model->label; ?></td>
-            <td class="text-left" data-name="subject"><?php echo $model->subject; ?></td>
-            <td class="text-center" data-name="sort_order"><?php echo $model->sort_order; ?></td>
+            <td class="text-left"><?php echo $model->code; ?></td>
+            <td class="text-left"><?php echo $model->label; ?></td>
+            <td class="text-left"><?php echo $model->subject; ?></td>
+            <td class="text-center"><?php echo $model->sort_order; ?></td>
             <td class="text-center" data-name="is_enable">
                 <?php echo Html::checkBox('is_enable', !!$model->is_enable); ?>
             </td>

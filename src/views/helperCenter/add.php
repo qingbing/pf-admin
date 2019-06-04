@@ -32,13 +32,6 @@ $options = [
         'input_type' => FormGenerator::INPUT_TYPE_SELECT,
         'input_data' => Labels::YesNo(),
     ],
-    'label' => array(
-        'code' => 'label',
-        'input_type' => FormGenerator::INPUT_TYPE_TEXT,
-        'data_type' => FormGenerator::DATA_TYPE_STRING,
-        'tip_msg' => '请输入显示标签',
-        'allow_empty' => false,
-    ),
     'code' => array(
         'code' => 'code',
         'input_type' => FormGenerator::INPUT_TYPE_TEXT,
@@ -46,6 +39,13 @@ $options = [
         'ajax_url' => $this->createUrl('uniqueCode'),
         'tip_msg' => '请输入代码',
         'allow_empty' => true,
+    ),
+    'label' => array(
+        'code' => 'label',
+        'input_type' => FormGenerator::INPUT_TYPE_TEXT,
+        'data_type' => FormGenerator::DATA_TYPE_STRING,
+        'tip_msg' => '请输入显示标签',
+        'allow_empty' => false,
     ),
     'subject' => array(
         'code' => 'subject',
