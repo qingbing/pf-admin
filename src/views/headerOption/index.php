@@ -42,7 +42,7 @@ use Html;
         <tr data-post-data='<?php echo Coding::json_encode(['id' => $model->id], true); ?>'
             data-tip=".w_display_status">
             <td class="text-center"><?php echo $model->sort_order; ?></td>
-            <td class="text-center" data-name="label"><?php echo $model->label; ?></td>
+            <td class="text-center"><?php echo $model->label; ?></td>
             <td class="text-center" data-name="default"><?php echo $model->default; ?></td>
             <td class="text-center" data-name="css_class" data-type="select"
                 data-options='<?php echo Coding::json_encode($cssClass, true); ?>'><?php echo $cssClass[$model->css_class]; ?></td>
