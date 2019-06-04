@@ -44,14 +44,6 @@ $options = [
         'data_type' => FormGenerator::DATA_TYPE_STRING,
         'tip_msg' => '请输入描述',
     ],
-    'sort_order' => [
-        'code' => 'sort_order',
-        'input_type' => FormGenerator::INPUT_TYPE_TEXT,
-        'data_type' => FormGenerator::DATA_TYPE_INTEGER,
-        'tip_msg' => '请输入排序',
-        'min' => '0',
-        'allow_empty' => false,
-    ],
     'content' => [
         'code' => 'content',
         'input_type' => FormGenerator::INPUT_TYPE_EDITOR,

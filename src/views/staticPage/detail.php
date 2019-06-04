@@ -15,12 +15,10 @@ namespace Admin\Controllers;
  * @var \Admin\Models\StaticContent $model
  */
 $options = [
-    'id',
     'code',
     'subject',
     'keywords',
     'description',
-    'sort_order',
     'create_time',
     'ip',
     'uid',
