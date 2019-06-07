@@ -8,13 +8,15 @@
 
 namespace Admin\Abstracts;
 
+use Abstracts\Base;
+
 /**
  * 用户自定义的admin模块进入操作及检测
  *
  * Class BeforeControllerAction
  * @package Admin\Abstracts
  */
-abstract class BeforeControllerAction
+abstract class BeforeControllerAction extends Base
 {
     private $_controller;
     private $_action;

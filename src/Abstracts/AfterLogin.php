@@ -8,8 +8,9 @@
 
 namespace Admin\Abstracts;
 
+use Abstracts\Base;
 
-abstract class AfterLogin
+abstract class AfterLogin extends Base
 {
     /* @var \Admin\Components\WebUser */
     private $_webUser;
