@@ -11,6 +11,7 @@ namespace Admin\Components;
 
 use Admin\Models\LoginForm;
 use Admin\Models\User;
+use Helper\Unit;
 
 class WebUser extends \Abstracts\WebUser
 {
@@ -40,6 +41,10 @@ class WebUser extends \Abstracts\WebUser
             Log::getInstance()->operate(true, Log::OPERATE_TYPE_LOGIN, '用户登录', '', [
                 'login_times' => ($user->login_times + 1),
             ]);
+        }
+        $className = "\Admin\Components\CustomAfterLogin";
+        if (class_exists($className)) {
+            Unit::createObject($className, $this);
         }
         // 销毁登录消息
         \Captcha::getCaptchaAction(LoginForm::$captchaAction)->destroyState();

@@ -9,6 +9,7 @@
 namespace Admin;
 
 use Admin\Components\Pub;
+use Helper\Unit;
 
 class Module extends \Render\Abstracts\Module
 {
@@ -54,10 +55,11 @@ class Module extends \Render\Abstracts\Module
                 // 除了 login 控制器，其他控制器必须登录
                 Pub::getUser()->loginRequired();
             }
-            $className = "\Admin\CustomAfterLogin";
+            $className = "\Admin\CustomBeforeControllerAction";
             if (class_exists($className)) {
-                /* @var \Abstracts\SingleTon $className */
-                $className::getInstance();
+                $class = Unit::createObject($className, $controller, $action);
+                /* @var $class \Admin\Abstracts\BeforeControllerAction */
+                return $class->run();
             }
             return true;
         } else {
