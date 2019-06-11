@@ -1,6 +1,7 @@
 <?php
 // 申明命名空间
 namespace Admin\Controllers;
+
 // 引用类
 use Admin\Components\Controller;
 use Admin\Components\Log;
@@ -90,7 +91,7 @@ class ReplaceController extends Controller
         $this->logMessage = '恢复默认' . $this->setting->name;
         $this->logKeyword = $this->setting->key;
         // 只验证重置content字段即可
-        $model->content = new Expression("NULL");
+        $model->content = null;
         if ($model->save(true, ['content'])) {
             $this->success($this->setting->name . '恢复默认成功', -1);
         } else {
