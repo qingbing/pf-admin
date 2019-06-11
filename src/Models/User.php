@@ -160,6 +160,9 @@ class User extends DbModel
             $this->addError('nickname', "用户昵称{$this->nickname}已经存在");
             return false;
         }
+        if ('' === $this->birthday) {
+            $this->birthday = null;
+        }
         return true;
     }
 
