@@ -30,8 +30,8 @@ use Tools\UploadManager;
  * @property string src
  * @property string x_flag
  * @property string content
- * @property string create_time
- * @property string update_time
+ * @property string created_at
+ * @property string updated_at
  */
 class BlockCategory extends DbModel
 {
@@ -68,7 +68,7 @@ class BlockCategory extends DbModel
             ['description', 'string', 'maxLength' => 255],
             ['src', 'string', 'maxLength' => 200],
             ['content', 'string'],
-            ['create_time, update_time', 'safe'],
+            ['created_at, updated_at', 'safe'],
         ];
     }
 
@@ -100,8 +100,8 @@ class BlockCategory extends DbModel
             'src' => '图片地址',
             'x_flag' => 'type为content的在线编辑器标识符',
             'content' => '内容',
-            'create_time' => '创建时间',
-            'update_time' => '更新时间',
+            'created_at' => '创建时间',
+            'updated_at' => '更新时间',
         ];
     }
 
@@ -202,11 +202,6 @@ class BlockCategory extends DbModel
                     @unlink($old_file);
                 }
             }
-        }
-        $datetime = Format::datetime();
-        $this->setAttribute('update_time', $datetime);
-        if ($this->getIsNewRecord()) {
-            $this->setAttribute('create_time', $datetime);
         }
         return true;
     }

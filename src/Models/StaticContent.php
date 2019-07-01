@@ -28,8 +28,8 @@ use Helper\Format;
  * @property string content
  * @property string ip
  * @property integer uid
- * @property string create_time
- * @property string update_time
+ * @property string created_at
+ * @property string updated_at
  */
 class StaticContent extends DbModel
 {
@@ -67,7 +67,7 @@ class StaticContent extends DbModel
             ['x_flag', 'string', 'maxLength' => 20],
             ['ip', 'string', 'maxLength' => 15],
             ['content', 'string'],
-            ['create_time, update_time', 'safe'],
+            ['created_at, updated_at', 'safe'],
         ];
     }
 
@@ -97,8 +97,8 @@ class StaticContent extends DbModel
             'content' => '内容',
             'ip' => '更新IP',
             'uid' => '用户ID',
-            'create_time' => '创建时间',
-            'update_time' => '更新时间',
+            'created_at' => '创建时间',
+            'updated_at' => '更新时间',
         ];
     }
 
@@ -122,12 +122,10 @@ class StaticContent extends DbModel
             return false;
         }
         // 其他信息准备
-        $datetime = Format::datetime();
         $this->setAttributes([
             'uid' => Pub::getUser()->getUid(),
             'ip' => Pub::getApp()->getRequest()->getUserHostAddress(),
         ]);
-        $this->setAttribute('update_time', $datetime);
         return true;
     }
 }

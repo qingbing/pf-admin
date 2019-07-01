@@ -27,8 +27,8 @@ $options = [
     ],
     'description',
     'sort_order',
-    'create_time',
-    'update_time',
+    'created_at',
+    'updated_at',
 ];
 
 if (BlockCategory::TYPE_CONTENT == $model->type) {

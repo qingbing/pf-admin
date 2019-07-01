@@ -30,8 +30,8 @@ use Tools\UploadManager;
  * @property integer is_enable
  * @property integer is_blank
  * @property string description
- * @property string create_time
- * @property string update_time
+ * @property string created_at
+ * @property string updated_at
  */
 class BlockOption extends DbModel
 {
@@ -66,7 +66,7 @@ class BlockOption extends DbModel
             ['key, label', 'string', 'maxLength' => 100],
             ['link, src', 'string', 'maxLength' => 200],
             ['description', 'string', 'maxLength' => 255],
-            ['create_time, update_time', 'safe'],
+            ['created_at, updated_at', 'safe'],
         ];
     }
 
@@ -96,8 +96,8 @@ class BlockOption extends DbModel
             'is_enable' => '是否启用发布显示',
             'is_blank' => '是否新开窗口',
             'description' => '描述',
-            'create_time' => '创建时间',
-            'update_time' => '更新时间',
+            'created_at' => '创建时间',
+            'updated_at' => '更新时间',
         ];
     }
 
@@ -152,11 +152,6 @@ class BlockOption extends DbModel
             if (is_file($old_file)) {
                 @unlink($old_file);
             }
-        }
-        $datetime = Format::datetime();
-        $this->setAttribute('update_time', $datetime);
-        if ($this->getIsNewRecord()) {
-            $this->setAttribute('create_time', $datetime);
         }
         return true;
     }
