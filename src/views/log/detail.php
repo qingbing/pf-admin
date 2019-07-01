@@ -47,23 +47,19 @@ $logTypes = Log::type();
 </dl>
 <dl class="form-group row">
     <dt class="col-md-3 col-sm-3 col-lg-3 control-label"><label>操作UID</label>:</dt>
-    <dd class="col-md-9 col-sm-9 col-lg-9 form-control-static"><?php echo $log['uid']; ?></dd>
+    <dd class="col-md-9 col-sm-9 col-lg-9 form-control-static"><?php echo $log['op_uid']; ?></dd>
 </dl>
 <dl class="form-group row">
     <dt class="col-md-3 col-sm-3 col-lg-3 control-label"><label>操作用户</label>:</dt>
-    <dd class="col-md-9 col-sm-9 col-lg-9 form-control-static"><?php echo $log['username']; ?></dd>
+    <dd class="col-md-9 col-sm-9 col-lg-9 form-control-static"><?php echo $log['op_username']; ?></dd>
 </dl>
 <dl class="form-group row">
     <dt class="col-md-3 col-sm-3 col-lg-3 control-label"><label>操作IP</label>:</dt>
-    <dd class="col-md-9 col-sm-9 col-lg-9 form-control-static"><?php echo $log['ip']; ?></dd>
+    <dd class="col-md-9 col-sm-9 col-lg-9 form-control-static"><?php echo $log['op_ip']; ?></dd>
 </dl>
 <dl class="form-group row">
     <dt class="col-md-3 col-sm-3 col-lg-3 control-label"><label>操作时间</label>:</dt>
-    <dd class="col-md-9 col-sm-9 col-lg-9 form-control-static"><?php echo $log['db_time']; ?></dd>
-</dl>
-<dl class="form-group row">
-    <dt class="col-md-3 col-sm-3 col-lg-3 control-label"><label>操作时间</label>:</dt>
-    <dd class="col-md-9 col-sm-9 col-lg-9 form-control-static"><?php echo $log['db_time']; ?></dd>
+    <dd class="col-md-9 col-sm-9 col-lg-9 form-control-static"><?php echo $log['created_at']; ?></dd>
 </dl>
 
 <dl class="form-group row">

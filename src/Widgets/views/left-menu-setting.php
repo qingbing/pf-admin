@@ -25,17 +25,17 @@ $module = \Admin\Components\Pub::getModule();
                 <?php } ?>
             </dl>
         <?php } ?>
+        <dl>
+            <dt>配置管理</dt>
+            <dd><a href="<?php echo $module->createUrl('nav/index'); ?>">前台导航</a></dd>
+            <dd><a href="<?php echo $module->createUrl('headerCate/index'); ?>">表头管理</a></dd>
+            <dd><a href="<?php echo $module->createUrl('formCate/index'); ?>">表单管理</a></dd>
+            <dd><a href="<?php echo $module->createUrl('blockCate/index'); ?>">区块管理</a></dd>
+            <dd><a href="<?php echo $module->createUrl('staticPage/index'); ?>">静态内容</a></dd>
+            <dd><a href="<?php echo $module->createUrl('helperCenter/index'); ?>">帮助中心</a></dd>
+        </dl>
     <?php } ?>
 
-    <dl>
-        <dt>配置管理</dt>
-        <dd><a href="<?php echo $module->createUrl('nav/index'); ?>">前台导航</a></dd>
-        <dd><a href="<?php echo $module->createUrl('headerCate/index'); ?>">表头管理</a></dd>
-        <dd><a href="<?php echo $module->createUrl('formCate/index'); ?>">表单管理</a></dd>
-        <dd><a href="<?php echo $module->createUrl('blockCate/index'); ?>">区块管理</a></dd>
-        <dd><a href="<?php echo $module->createUrl('staticPage/index'); ?>">静态内容</a></dd>
-        <dd><a href="<?php echo $module->createUrl('helperCenter/index'); ?>">帮助中心</a></dd>
-    </dl>
     <dl>
         <dt>公告管理</dt>
         <dd><a href="<?php echo $module->createUrl('notice/index'); ?>">公告列表</a></dd>

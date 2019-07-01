@@ -73,7 +73,7 @@ class User extends DbModel
         return [
             ['sex, refer_uid, login_times, is_super, is_enable', 'required'],
             ['is_super, is_enable', 'numerical', 'integerOnly' => true],
-            ['username', 'string', 'maxLength' => 20],
+            ['username', 'string', 'maxLength' => 50],
             ['password', 'string', 'maxLength' => 32],
             ['nickname, real_name', 'string', 'maxLength' => 30],
             ['avatar', 'string', 'maxLength' => 200],
@@ -84,10 +84,12 @@ class User extends DbModel
             ['sex', 'in', 'range' => ['1', '2', '3']],
 
             ['birthday', 'date'],
-            ['register_time, last_login_time', 'datetime'],
+            ['last_login_time', 'datetime'],
 
             ['nickname, username', self::UNIQUE],
             ['username', 'email'],
+
+            ['register_time', 'safe'],
         ];
     }
 
@@ -267,7 +269,6 @@ class User extends DbModel
     {
         $this->refer_uid = Pub::getUser()->getUid();
         $this->register_ip = Pub::getApp()->getRequest()->getUserHostAddress();
-        $this->register_time = new Expression('NOW()');
         return true;
     }
 

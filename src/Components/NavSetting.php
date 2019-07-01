@@ -24,7 +24,7 @@ class NavSetting extends SingleTon
             '/personal/index',
         ]);
         $this->addNav('setting', '网站配置', [
-            '/nav/index',
+            '/notice/index',
         ]);
     }
 
