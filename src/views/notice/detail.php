@@ -28,10 +28,10 @@ $options = [
     'expire_time',
     'read_times',
     'content',
-    'create_time',
-    'uid',
-    'ip',
-    'update_time',
+    'op_uid',
+    'op_ip',
+    'created_at',
+    'updated_at',
 ];
 // 填写表单
 $this->widget('\Widgets\FormGenerator', [

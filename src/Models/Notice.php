@@ -28,10 +28,10 @@ use Helper\Format;
  * @property integer is_publish
  * @property string publish_time
  * @property string expire_time
- * @property string create_time
- * @property integer uid
- * @property string ip
- * @property string update_time
+ * @property integer op_uid
+ * @property string op_ip
+ * @property string created_at
+ * @property string updated_at
  */
 class Notice extends DbModel
 {
@@ -62,13 +62,13 @@ class Notice extends DbModel
     {
         return [
             ['sort_order, read_times, is_publish, expire_time', 'required'],
-            ['sort_order, read_times, is_publish, uid', 'numerical', 'integerOnly' => true],
+            ['sort_order, read_times, is_publish, op_uid', 'numerical', 'integerOnly' => true],
             ['subject, keywords', 'string', 'maxLength' => 100],
             ['description', 'string', 'maxLength' => 255],
             ['x_flag', 'string', 'maxLength' => 20],
-            ['ip', 'string', 'maxLength' => 15],
+            ['op_ip', 'string', 'maxLength' => 15],
             ['content, publish_time, expire_time', 'string'],
-            ['create_time, update_time', 'safe'],
+            ['created_at, updated_at', 'safe'],
         ];
     }
 
@@ -99,10 +99,10 @@ class Notice extends DbModel
             'is_publish' => '是否发布',
             'publish_time' => '发布时间',
             'expire_time' => '有效时间',
-            'create_time' => '创建时间',
-            'uid' => '用户ID',
-            'ip' => '更新IP',
-            'update_time' => '更新时间',
+            'op_uid' => '用户ID',
+            'op_ip' => '更新IP',
+            'created_at' => '创建时间',
+            'updated_at' => '更新时间',
         ];
     }
 
@@ -116,14 +116,10 @@ class Notice extends DbModel
     {
         $datetime = Format::datetime();
         $this->setAttributes([
-            'uid' => Pub::getUser()->getUid(),
-            'ip' => Pub::getApp()->getRequest()->getUserHostAddress(),
+            'op_uid' => Pub::getUser()->getUid(),
+            'op_ip' => Pub::getApp()->getRequest()->getUserHostAddress(),
         ]);
-        $this->setAttribute('update_time', $datetime);
-        if ($this->getIsNewRecord()) {
-            // 插入
-            $this->create_time = $datetime;
-        }
+        $this->setAttribute('updated_at', $datetime);
         return true;
     }
 }

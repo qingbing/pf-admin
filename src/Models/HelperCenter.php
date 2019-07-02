@@ -30,10 +30,10 @@ use Helper\Format;
  * @property integer is_category
  * @property string content
  * @property string x_flag
- * @property string create_time
- * @property integer uid
- * @property string ip
- * @property string update_time
+ * @property integer op_uid
+ * @property string op_ip
+ * @property string created_at
+ * @property string updated_at
  */
 class HelperCenter extends DbModel
 {
@@ -64,14 +64,14 @@ class HelperCenter extends DbModel
     {
         return [
             ['parent_id, sort_order, is_enable, is_category', 'required'],
-            ['parent_id, sort_order, is_enable, is_category, uid', 'numerical', 'integerOnly' => true],
+            ['parent_id, sort_order, is_enable, is_category, op_uid', 'numerical', 'integerOnly' => true],
             ['label, code', 'string', 'maxLength' => 30],
             ['subject', 'string', 'maxLength' => 100],
             ['keywords, description', 'string', 'maxLength' => 255],
             ['x_flag', 'string', 'maxLength' => 20],
-            ['ip', 'string', 'maxLength' => 15],
+            ['op_ip', 'string', 'maxLength' => 15],
             ['content', 'string'],
-            ['create_time, update_time', 'safe'],
+            ['created_at, updated_at', 'safe'],
         ];
     }
 
@@ -105,10 +105,10 @@ class HelperCenter extends DbModel
             'is_category' => '是否分类',
             'content' => '内容',
             'x_flag' => '编辑器标志',
-            'create_time' => '创建时间',
-            'uid' => '用户ID',
-            'ip' => '更新IP',
-            'update_time' => '更新时间',
+            'op_uid' => '操作ID',
+            'op_ip' => '操作IP',
+            'created_at' => '创建时间',
+            'updated_at' => '更新时间',
         ];
     }
 
@@ -135,15 +135,13 @@ class HelperCenter extends DbModel
         }
 
         // 赋值操作信息
-        $datetime = Format::datetime();
-        if ($this->getIsNewRecord()) {
-            $this->create_time = $datetime;
-        }
         $this->setAttributes([
-            'uid' => Pub::getUser()->getUid(),
-            'ip' => Pub::getApp()->getRequest()->getUserHostAddress(),
+            'op_uid' => Pub::getUser()->getUid(),
+            'op_ip' => Pub::getApp()->getRequest()->getUserHostAddress(),
         ]);
-        $this->setAttribute('update_time', $datetime);
+        if (!$this->getIsNewRecord()) {
+            $this->updated_at = Format::datetime();
+        }
         return true;
     }
 

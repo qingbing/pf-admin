@@ -61,7 +61,7 @@ use Tools\Labels;
             </td>
             <td class="text-center"><?php echo $model->subOptionCount; ?></td>
             <td class="text-center">
-                <?php echo Html::encode($model->update_time); ?>
+                <?php echo Html::encode($model->updated_at); ?>
             </td>
             <td class="text-left" data-name="sort_order" data-type="upDown" data-reload="true"
                 data-ajax-url="<?php echo $this->createUrl('upDown', ['parentId' => $parentId, 'id' => $model->id]) ?>">

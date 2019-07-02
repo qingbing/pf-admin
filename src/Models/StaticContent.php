@@ -26,8 +26,8 @@ use Helper\Format;
  * @property integer sort_order
  * @property string x_flag
  * @property string content
- * @property string ip
- * @property integer uid
+ * @property string op_ip
+ * @property integer op_uid
  * @property string created_at
  * @property string updated_at
  */
@@ -60,12 +60,12 @@ class StaticContent extends DbModel
     {
         return [
             ['sort_order', 'required'],
-            ['sort_order, uid', 'numerical', 'integerOnly' => true],
+            ['sort_order, op_uid', 'numerical', 'integerOnly' => true],
             ['code', 'string', 'maxLength' => 30],
             ['subject, keywords', 'string', 'maxLength' => 100],
             ['description', 'string', 'maxLength' => 255],
             ['x_flag', 'string', 'maxLength' => 20],
-            ['ip', 'string', 'maxLength' => 15],
+            ['op_ip', 'string', 'maxLength' => 15],
             ['content', 'string'],
             ['created_at, updated_at', 'safe'],
         ];
@@ -95,8 +95,8 @@ class StaticContent extends DbModel
             'sort_order' => '排序',
             'x_flag' => '编辑器标志',
             'content' => '内容',
-            'ip' => '更新IP',
-            'uid' => '用户ID',
+            'op_ip' => '操作IP',
+            'op_uid' => '操作ID',
             'created_at' => '创建时间',
             'updated_at' => '更新时间',
         ];
@@ -123,8 +123,8 @@ class StaticContent extends DbModel
         }
         // 其他信息准备
         $this->setAttributes([
-            'uid' => Pub::getUser()->getUid(),
-            'ip' => Pub::getApp()->getRequest()->getUserHostAddress(),
+            'op_uid' => Pub::getUser()->getUid(),
+            'op_ip' => Pub::getApp()->getRequest()->getUserHostAddress(),
         ]);
         return true;
     }

@@ -19,10 +19,10 @@ $options = [
     'subject',
     'keywords',
     'description',
-    'create_time',
-    'ip',
-    'uid',
-    'update_time',
+    'op_ip',
+    'op_uid',
+    'created_at',
+    'updated_at',
     'content' => [
         'type' => 'view',
         'callable' => function ($value) use ($model) {
