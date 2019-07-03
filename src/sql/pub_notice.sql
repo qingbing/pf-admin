@@ -1,4 +1,5 @@
 
+
 -- --------------------------------------------------------
 
 --
@@ -16,8 +17,8 @@ CREATE TABLE IF NOT EXISTS `pub_notice` (
 
   `read_times` int(10) UNSIGNED NOT NULL DEFAULT '0' COMMENT '浏览次数',
   `is_publish` tinyint(1) UNSIGNED NOT NULL DEFAULT '0' COMMENT '是否发布',
-  `publish_time` datetime NOT NULL COMMENT '发布时间',
-  `expire_time` datetime NOT NULL DEFAULT '2100-01-01 23:59:59' COMMENT '有效时间',
+  `publish_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '发布时间',
+  `expire_at` datetime NOT NULL DEFAULT '2100-01-01 23:59:59' COMMENT '有效时间',
 
   `op_uid` BIGINT(20) UNSIGNED NOT NULL COMMENT '用户ID',
   `op_ip` varchar(15) NOT NULL DEFAULT '' COMMENT '更新IP',
@@ -28,5 +29,5 @@ CREATE TABLE IF NOT EXISTS `pub_notice` (
   KEY `idx_sortOrder` (`sort_order`),
   KEY `idx_readTimes` (`read_times`),
   KEY `idx_isPublish` (`is_publish`),
-  KEY `idx_publishTime` (`publish_time`)
+  KEY `idx_publishAt` (`publish_at`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COMMENT='公告管理表';

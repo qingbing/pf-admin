@@ -26,8 +26,8 @@ use Helper\Format;
  * @property string x_flag
  * @property integer read_times
  * @property integer is_publish
- * @property string publish_time
- * @property string expire_time
+ * @property string publish_at
+ * @property string expire_at
  * @property integer op_uid
  * @property string op_ip
  * @property string created_at
@@ -61,13 +61,13 @@ class Notice extends DbModel
     public function rules()
     {
         return [
-            ['sort_order, read_times, is_publish, expire_time', 'required'],
+            ['sort_order, read_times, is_publish, expire_at', 'required'],
             ['sort_order, read_times, is_publish, op_uid', 'numerical', 'integerOnly' => true],
             ['subject, keywords', 'string', 'maxLength' => 100],
             ['description', 'string', 'maxLength' => 255],
             ['x_flag', 'string', 'maxLength' => 20],
             ['op_ip', 'string', 'maxLength' => 15],
-            ['content, publish_time, expire_time', 'string'],
+            ['content, publish_at, expire_at', 'string'],
             ['created_at, updated_at', 'safe'],
         ];
     }
@@ -97,8 +97,8 @@ class Notice extends DbModel
             'x_flag' => '编辑器标志',
             'read_times' => '浏览次数',
             'is_publish' => '是否发布',
-            'publish_time' => '发布时间',
-            'expire_time' => '有效时间',
+            'publish_at' => '发布时间',
+            'expire_at' => '有效时间',
             'op_uid' => '用户ID',
             'op_ip' => '更新IP',
             'created_at' => '创建时间',

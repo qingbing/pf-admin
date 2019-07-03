@@ -36,10 +36,10 @@ $options = [
     'refer_uid',
     'zip_code',
     'register_ip',
-    'register_time',
+    'register_at',
     'login_times',
     'last_login_ip',
-    'last_login_time',
+    'last_login_at',
     'is_super' => [
         'callable' => ['\Tools\Labels', 'YesNo'],
         'type' => 'view',

@@ -53,11 +53,11 @@ class NoticeController extends Controller
                 ->addParam(':is_publish', $fixer['is_publish']);
         }
         if (isset($fixer['start_time']) && '' !== $fixer['start_time']) {
-            $criteria->addWhere('`publish_time`>:start_time')
+            $criteria->addWhere('`publish_at`>:start_time')
                 ->addParam(':start_time', $fixer['start_time']);
         }
         if (isset($fixer['end_time']) && '' !== $fixer['end_time']) {
-            $criteria->addWhere('`publish_time`>:end_time')
+            $criteria->addWhere('`publish_at`>:end_time')
                 ->addParam(':end_time', $fixer['end_time']);
         }
         if (isset($fixer['keyword']) && '' !== $fixer['keyword']) {

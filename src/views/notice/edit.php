@@ -59,14 +59,14 @@ $options = [
         'input_type' => FormGenerator::INPUT_TYPE_SELECT,
         'input_data' => Labels::YesNo(),
     ],
-    'publish_time' => [
-        'code' => 'publish_time',
+    'publish_at' => [
+        'code' => 'publish_at',
         'input_type' => FormGenerator::INPUT_TYPE_TEXT,
         'data_type' => FormGenerator::DATA_TYPE_TIME,
         'allow_empty' => false,
     ],
-    'expire_time' => [
-        'code' => 'expire_time',
+    'expire_at' => [
+        'code' => 'expire_at',
         'input_type' => FormGenerator::INPUT_TYPE_TEXT,
         'data_type' => FormGenerator::DATA_TYPE_TIME,
         'allow_empty' => false,

@@ -40,7 +40,7 @@ echo Html::beginForm(['admin/notice/index'], 'get', [
         <dd>
             <div class="input-group w-dateRange" data-single="false" data-time="true">
                 <span class="input-group-addon fa fa-calendar"></span>
-                <?php echo Html::textField('publish_time', (isset($fixer['publish_time']) ? $fixer['publish_time'] : ''), [
+                <?php echo Html::textField('publish_at', (isset($fixer['publish_at']) ? $fixer['publish_at'] : ''), [
                     'class' => 'form-control',
                     'style' => 'min-width:310px',
                     'readonly' => 'readonly',
