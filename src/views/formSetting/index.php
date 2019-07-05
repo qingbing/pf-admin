@@ -29,7 +29,7 @@ $this->widget('\Widgets\FormGenerator', [
     <dl class="form-group row">
         <dd class="col-sm-6 col-md-6 col-lg-6 col-sm-offset-3 col-md-offset-3 col-lg-offset-3">
             <button type="submit" class="btn btn-primary" id="submitBtn"><i class="fa fa-save">保存配置</i></button>
-            <a class="btn btn-primary CONFIRM_AJAX" data-reload="true" data-message="确认重置配置么"
+            <a class="btn btn-primary ACTION-HREF" data-message="确认重置配置么" data-is-ajax="true" data-reload="true"
                href="<?php echo $this->createUrl('reset', ['key' => $model->getScenario()]); ?>"><i
                         class="fa fa-cog"></i>配置重置</a>
         </dd>

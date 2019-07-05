@@ -66,7 +66,7 @@ $this->widget('\Widgets\TableView', [
     'dataProcessing' => function ($data) {
         $operate = '<a href="' . $this->createUrl('edit', ['id' => $data->id]) . '" class="text-primary w-modal" data-mode="custom"><i class="fa fa-edit">编辑</i></a>';
         $operate .= ' <a href="' . $this->createUrl('detail', ['id' => $data->id]) . '" class="text-info w-modal" data-mode="custom"><i class="fa fa-list-alt">详情</i></a>';
-        $operate .= ' <a href="' . $this->createUrl('delete', ['id' => $data->id]) . '" class="text-danger CONFIRM_AJAX" data-reload="true" data-message="确认删除该公告么？"><i class="fa fa-trash">删除</i></a>';
+        $operate .= ' <a href="' . $this->createUrl('delete', ['id' => $data->id]) . '" class="text-danger ACTION-HREF" data-message="确认删除该公告么？" data-is-ajax="true" data-reload="true"><i class="fa fa-trash">删除</i></a>';
         $process = [
             'operate' => $operate,
         ];

@@ -43,7 +43,7 @@ echo Html::beginForm('', 'post', [
     <dd class="col-sm-2 col-md-2 col-lg-2">
         <a href="<?php echo $this->createUrl('reset', ['key' => $model->key]); ?>"
            data-message="确认重置该内容么？"
-           class="btn btn-primary btn-block CONFIRM_AJAX" data-reload="true"><i class="fa fa-cog">重置</i></a>
+           class="btn btn-primary btn-block ACTION-HREF" data-is-ajax="true" data-reload="true"><i class="fa fa-cog">重置</i></a>
     </dd>
 </dl>
 <?php echo Html::endForm(); ?>

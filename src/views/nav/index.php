@@ -20,7 +20,7 @@ use Tools\Labels;
 ?>
 <div class="margin-bottom">
     <a href="<?php echo $this->createUrl('refreshSortOrder', ['parentId' => $parentId]); ?>"
-       class="btn btn-primary CONFIRM_AJAX" data-message="确认刷新列表显示顺序么？" data-reload="true"><i
+       class="btn btn-primary ACTION-HREF" data-message="确认刷新列表显示顺序么？" data-is-ajax="true" data-reload="true"><i
                 class="fa fa-refresh">刷新排序</i></a>
 </div>
 <table class="table table-hover table-bordered table-striped w-edit-table"

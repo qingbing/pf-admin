@@ -23,7 +23,7 @@ use Tools\Labels;
         <i class="fa fa-plus">添加</i>
     </a>
     <a href="<?php echo $this->createUrl('refreshSortOrder', ['parentId' => $parentId]); ?>"
-       class="btn btn-primary CONFIRM_AJAX" data-message="确认刷新帮助中心顺序么？" data-reload="true"><i
+       class="btn btn-primary ACTION-HREF" data-message="确认刷新帮助中心顺序么？" data-is-ajax="true" data-reload="true"><i
                 class="fa fa-refresh">刷新排序</i></a>
 </div>
 <table class="table table-hover table-bordered table-striped w-edit-table"
@@ -71,14 +71,12 @@ use Tools\Labels;
                 <a href="<?php echo $this->createUrl('editDetail', ['parentId' => $parentId, 'id' => $model->id]) ?>"
                    class="btn btn-primary w-modal" data-mode="custom"><i class="fa fa-edit">编辑</i></a>
                 <a href="<?php echo $this->createUrl('delete', ['parentId' => $parentId, 'id' => $model->id]) ?>"
-                   class="btn btn-danger CONFIRM_AJAX" data-reload="true" data-message="确认要删除该帮助中心主题么？"><i
+                   class="btn btn-danger ACTION-HREF" data-message="确认要删除该帮助中心主题么？" data-is-ajax="true" data-reload="true"><i
                             class="fa fa-trash">删除</i></a>
-
                 <?php if ($model->is_category) { ?>
                     <a href="<?php echo $this->createUrl('index', ['parentId' => $model->id]) ?>"
                        class="btn btn-primary" target="_blank"><i class="fa fa-list-alt">查看子项</i></a>
                 <?php } ?>
-
             </td>
             <td class="w_display_status"></td>
         </tr>
