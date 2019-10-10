@@ -1,5 +1,5 @@
 <?php
-ClientScript::getInstance()->registerCssFile(\Admin\Components\Pub::getAssetBaseUrl() . '/css/login.css');
+ClientScript::getInstance()->registerCssFile(\Assets001::getAssetBaseUrl() . '/css/login.css');
 ?>
 <div class="container-fluid">
     <?php echo Html::beginForm('', 'post', [

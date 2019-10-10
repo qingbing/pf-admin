@@ -5,7 +5,6 @@ namespace Admin\Controllers;
 // 引用类
 use FormGenerator;
 use Html;
-use Admin\Components\Pub;
 
 /**
  * Created by generate tool of phpcorner.
@@ -17,7 +16,7 @@ use Admin\Components\Pub;
  * @var \Admin\Components\Controller $this
  * @var \Admin\Models\BlockCategory $model
  */
-\ClientScript::getInstance()->registerScriptFile(Pub::getAssetBaseUrl() . '/js/jquery.form.js');
+\ClientScript::getInstance()->registerScriptFile(\Assets001::getAssetBaseUrl() . '/js/jquery.form.js');
 echo Html::beginForm('', 'post', [
     'id' => 'ajaxForm',
     'data-callback' => 'PL.saveAjaxFileCallback',

@@ -3,7 +3,6 @@
 namespace Admin\Controllers;
 
 // 引用类
-use Admin\Components\Pub;
 use Admin\Models\BlockCategory;
 use FormGenerator;
 use Helper\HttpException;
@@ -21,7 +20,7 @@ use Tools\Labels;
  * @var \Admin\Models\BlockCategory $category
  * @var \Admin\Models\BlockOption $model
  */
-\ClientScript::getInstance()->registerScriptFile(Pub::getAssetBaseUrl() . '/js/jquery.form.js');
+\ClientScript::getInstance()->registerScriptFile(\Assets001::getAssetBaseUrl() . '/js/jquery.form.js');
 echo Html::beginForm('', 'post', [
     'id' => 'ajaxForm',
     'data-callback' => 'PL.saveAjaxFileCallback',

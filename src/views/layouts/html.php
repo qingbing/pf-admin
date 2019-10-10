@@ -1,7 +1,7 @@
 <?php
 /* @var \Admin\Components\Controller $this */
 /* @var string $content */
-$assetBaseUrl = \Admin\Components\Pub::getAssetBaseUrl();
+$assetBaseUrl = \Assets001::getAssetBaseUrl();
 ?><!doctype html>
 <html lang="en">
 <head>

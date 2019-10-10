@@ -16,7 +16,7 @@
             "email": "780042175@qq.com"
         }
     ],
-    "require": {
+    "require-dev": {
         "qingbing/php-config": ">=1.0, <2.0",
         "qingbing/php-helper": ">=1.0, <2.0",
         "qingbing/php-model": ">=1.0, <2.0",
@@ -40,11 +40,10 @@
         "qingbing/pf-widgets-kindeditor": ">=1.0, <2.0",
         "qingbing/pf-widgets-table-view": ">=1.0, <2.0",
         "qingbing/pf-abstracts-web-user": ">=1.0, <2.0",
-        "qingbing/pf-abstracts-operate-log": ">=1.0, <2.0"
-    },
-    "require-dev": {
+        "qingbing/pf-abstracts-operate-log": ">=1.0, <2.0",
         "qingbing/pf-database-dict": ">=1.0, <2.0",
-        "qingbing/pf-generator-tools": ">=1.0, <2.0"
+        "qingbing/pf-generator-tools": ">=1.0, <2.0",
+        "qingbing/pf-assets-001": ">=1.0, <2.0"
     },
     "autoload": {
         "psr-4": {
