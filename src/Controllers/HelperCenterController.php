@@ -101,7 +101,6 @@ class HelperCenterController extends Controller
             }
         }
         // 设置页面标题
-        // 设置页面标题
         if (0 == $this->parentId) {
             $this->setPageTitle('添加帮助中心主题');
         } else {
@@ -261,7 +260,11 @@ class HelperCenterController extends Controller
         $models = $this->findAll();
         $i = 0;
         $this->logMessage = '帮助中心顺序刷新';
-        $this->logKeyword = "{$this->parent->id}";
+        if (0 == $this->parentId) {
+            $this->logKeyword = 0;
+        } else {
+            $this->logKeyword = "{$this->parent->id}";
+        }
         $transaction = \PF::app()->getDb()->beginTransaction();
         foreach ($models as $model) {
             $model->sort_order = ++$i;
